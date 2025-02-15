@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="Catalogo_Avalonia_Final/App.axaml" value="Catalogo_Avalonia_Final/Catalogo_Avalonia_Final.csproj" />
+        <entry key="Catalogo_Avalonia_Final/MainWindow.axaml" value="Catalogo_Avalonia_Final/Catalogo_Avalonia_Final.csproj" />
+        <entry key="Catalogo_Avalonia_Final/Views/CatalogoView.axaml" value="Catalogo_Avalonia_Final/Catalogo_Avalonia_Final.csproj" />
+      </map>
+    </option>
+  </component>
+</project>
