@@ -8,4 +8,6 @@ public partial class CatalogoView : Window
     {
         InitializeComponent();
     }
+    
+    
 }

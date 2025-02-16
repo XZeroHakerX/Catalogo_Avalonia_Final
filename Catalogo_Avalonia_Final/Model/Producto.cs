@@ -1,3 +1,5 @@
+using Avalonia.Media.Imaging;
+
 namespace Catalogo_Avalonia_Final.Model;
 
 public class Producto
@@ -9,26 +11,16 @@ public class Producto
     public int Stock {get; set;}
     public string Categoria {get; set;}
     public string OtraInformacion {get; set;}
-    public string Foto {get; set;}
+    public Bitmap Foto {get; set;}
     
+    public bool IsSelected {get; set;}
+  
     
     // Constructor: (Inicializacion de las propiedades)
-    public Producto(string nombre, string marca, double precio)
-    {
-        Nombre = nombre;
-        Marca = marca;
-        Descripcion = "N/S";
-        Precio = precio;
-        Stock = 0;
-        Categoria = "N/S";
-        OtraInformacion = "N/S";
-        Foto = "";
-    }
-    
     public Producto(string nombre, string marca, 
         string descripcion, double precio, int stock, 
         string categoria, string otraInformacion, 
-        string foto)
+        Bitmap foto)
     {
         Nombre = nombre;
         Marca = marca;
@@ -38,5 +30,6 @@ public class Producto
         Categoria = categoria;
         OtraInformacion = otraInformacion;
         Foto = foto;
+        IsSelected = false;
     }
 }
