@@ -46,8 +46,11 @@
                                         <MenuItem Header="_Ayuda usuario.." Command="{Binding ActivarPanelAyudaCommand}"/>
                                 </MenuItem>
                         </Menu>
-                        
-                 
+<!-- Panel Inicio: -->
+
+                        <StackPanel IsVisible="{Binding PanelInicio}" Width="800">
+                                <Image Source="{Binding ImagenEmpresaFondo}" HorizontalAlignment="Center" VerticalAlignment="Center"></Image>
+                        </StackPanel>
 <!-- Panel Aniadir: -->
                         <Grid Name="PanelAniadir" ColumnDefinitions="*,*" RowDefinitions="*" IsVisible="{Binding PanelAniadir}"  Margin="10" >
                                 
@@ -144,11 +147,11 @@
                                 
                                 <!-- Pestaña Individual: -->
                                 <TabItem Header="Individual.." Foreground="Azure">
-                                        <StackPanel Orientation="Horizontal" Spacing="10" Background="CadetBlue" Width="760" Height="320">
+                                        <StackPanel Orientation="Horizontal" Spacing="10" Background="CadetBlue" Width="760" Height="340">
                                                 <!-- Parte Izquierda Informacion: -->
                                                 
                                                 <DockPanel>
-                                                <StackPanel Orientation="Vertical" Spacing="10" Background="Azure" Height="310" Width="480" Margin="5,0,0,0">
+                                                <StackPanel Orientation="Vertical" Spacing="10" Background="Azure" Height="330" Width="480" Margin="5,0,0,0">
                                                         <!-- Detalles del producto -->
                                                         <TextBlock FontWeight="Bold" FontSize="30" Margin="5,0,0,0" Text="{Binding TextoContador}" />
                                                         <Grid>
@@ -202,8 +205,8 @@
                                                 </StackPanel>
                                                         
                                                 </DockPanel>
-                                                <!-- Parte Izquierda Informacion: -->
-                                                <StackPanel Orientation="Vertical"  Width="260" Height="310" Spacing="10" Background="Azure">
+                                                <!-- Parte Derecha Informacion: -->
+                                                <StackPanel Orientation="Vertical"  Width="260" Height="330" Spacing="10" Background="Azure">
                                                         <!-- Foto -->
                                                         <Image Source="{Binding Foto}" Width="200" Height="200" Margin="5" />
                                                         <!-- Precio -->
@@ -219,8 +222,8 @@
                                 <!-- Pestaña Lista: -->
                                 <TabItem Header="Listado.." Foreground="Azure">
                                         
-                                        <StackPanel Background="CadetBlue" Width="760" Height="320" Spacing="">
-                                                <ListBox Background="Azure" Width="750" Height="310" Margin="5" VerticalAlignment="Bottom" 
+                                        <StackPanel Background="CadetBlue" Width="760" Height="340" Spacing="">
+                                                <ListBox Background="Azure" Width="750" Height="330" Margin="5" VerticalAlignment="Bottom" 
                                                          ItemsSource="{Binding ProductosLista}"
                                                          ScrollViewer.VerticalScrollBarVisibility="Visible"
                                                          ScrollViewer.HorizontalScrollBarVisibility="Disabled">
@@ -278,7 +281,8 @@
                                 </StackPanel>
                                 
                                 <!-- Botón para eliminar productos seleccionados -->
-                                <Button Content="Eliminar Seleccionados" Background="Brown" Command="{Binding EliminarProductosCommand}" HorizontalContentAlignment="Center"
+                                <Button Content="Eliminar Seleccionados" Foreground="Azure" FontSize="16" 
+                                        Background="Brown" Command="{Binding EliminarProductosCommand}" HorizontalContentAlignment="Center"
                                         VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="200" Height="45" Margin="6" />
                                 
                         </StackPanel>
@@ -362,6 +366,32 @@
                                         </Border>
                                 </StackPanel>
                         </Grid>                       
+
+<!-- Panel Ayuda-->
+                        <Grid Background="PaleTurquoise" IsVisible="{Binding PanelAyuda}" Width="750" Height="380" Margin="20,20,0,0" >
+                                <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                
+                                <TextBlock Text="Centro de Ayuda para Usuario" Foreground="Azure" Background="CadetBlue" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" 
+                                           Margin="0,20,0,0" />
+                                <StackPanel Grid.Row="1" Orientation="Vertical" Spacing="10">
+                                        <TextBlock Text="¿Necesitas ayuda? Aquí encontrarás respuestas a tus preguntas frecuentes." TextWrapping="Wrap" HorizontalAlignment="Center" 
+                                                   FontSize="15" Margin="0,5,0,0"/>
+                                        <Expander Header="Cómo usar el catálogo" IsExpanded="True" FontSize="15" Margin="100,0,0,0">
+                                                <TextBlock Text="--> Para ver el listado haz clic en el submenú 'Ver Artículos..' y podras elegir entre las vistas disponibles, Individual o Listado." 
+                                                           FontSize="15" TextWrapping="Wrap" />
+                                        </Expander>
+                                        <Expander Header="Cómo añadir un artículo" FontSize="15" Margin="100,0,0,0">
+                                                <TextBlock Text="--> Para añadir un articulo selecciona en el submenú 'Añadir Artículo..' y completa los campos. Luego pulsa el botón para guardar el artículo." 
+                                                           FontSize="15" TextWrapping="Wrap" />
+                                        </Expander>
+                                        <Expander Header="Contacto" FontSize="15" Margin="100,0,0,0">
+                                                <TextBlock Text="--> Envíanos un correo a xzerohakerx@gmail.com para más ayuda o información." FontSize="15" TextWrapping="Wrap" />
+                                        </Expander>
+                                </StackPanel>
+                        </Grid>
 
         
                 

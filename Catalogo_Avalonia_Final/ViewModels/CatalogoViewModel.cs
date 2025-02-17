@@ -28,7 +28,8 @@ public partial class CatalogoViewModel : ObservableObject
     [ObservableProperty] public string? _categoria;
     [ObservableProperty] public string? _otraInformacion;
     [ObservableProperty] public Bitmap? _foto;
-    
+
+    [ObservableProperty] public bool _panelInicio;
     [ObservableProperty] public bool _panelAniadir;
     [ObservableProperty] public bool _panelVer;
     [ObservableProperty] public bool _panelEliminar;
@@ -43,6 +44,7 @@ public partial class CatalogoViewModel : ObservableObject
     [ObservableProperty] public double _cantidadDonacion;
     [ObservableProperty] public Bitmap _imagenDonacion;
     [ObservableProperty] public Bitmap _imagenEmpresa;
+    [ObservableProperty] public Bitmap _imagenEmpresaFondo;
     
     [ObservableProperty] public bool _siguiente;
     [ObservableProperty] public bool _anterior;
@@ -61,6 +63,7 @@ public partial class CatalogoViewModel : ObservableObject
     public CatalogoViewModel()
     {
         LimpiarCampos();
+        PanelInicio = true;
         PanelDonar = false;
         PanelEliminar = false;
         PanelInfo = false;
@@ -72,6 +75,7 @@ public partial class CatalogoViewModel : ObservableObject
         ActivarPanelDonacionTres = false;
         ImagenDonacion = null;
         ImagenEmpresa = new Bitmap(AssetLoader.Open(new Uri("avares://Catalogo_Avalonia_Final/Assets/empresa.png")));
+        ImagenEmpresaFondo = new Bitmap(AssetLoader.Open(new Uri("avares://Catalogo_Avalonia_Final/Assets/empresa25.png")));
         CantidadDonacion = 0.0;
         TextoContador = "Producto 0 de 0:";
         IniciaListaProductos();
@@ -158,6 +162,47 @@ public partial class CatalogoViewModel : ObservableObject
             ImagenDonacion = ImagenCaraTres;
             ActivarPanelDonacionTres = true;
         }
+    }
+    
+    private void LimpiarCampos()
+    {
+        Nombre = string.Empty;
+        Marca = string.Empty;
+        Descripcion = string.Empty;
+        Precio = 0.0;
+        Stock = 0;
+        Categoria = string.Empty;
+        OtraInformacion = string.Empty;
+        Foto = ImagenPorDefecto;
+        TextoContador = "Producto 0 de 0:";
+    }
+
+    private void IniciarCampos()
+    {
+        if (Productos != null && Productos.Count > 0 && contadorLista >= 0 && contadorLista < Productos.Count)
+        { 
+            TextoContador = "Producto " + (contadorLista + 1) + " de " + Productos.Count + ":";
+            Nombre = Productos[contadorLista].Nombre;
+            Marca = Productos[contadorLista].Marca;
+            Descripcion = Productos[contadorLista].Descripcion;
+            Precio = Productos[contadorLista].Precio; 
+            Stock = Productos[contadorLista].Stock; 
+            Categoria = Productos[contadorLista].Categoria; 
+            OtraInformacion = Productos[contadorLista].OtraInformacion; 
+            Foto = Productos[contadorLista].Foto;
+        }
+        else
+        {
+            LimpiarCampos();
+        }
+        
+    }
+
+    private void LimpiarPanelesDonacion()
+    {
+        ActivarPanelDonacionUno = false;
+        ActivarPanelDonacionDos = false;
+        ActivarPanelDonacionTres = false;
     }
     
     [RelayCommand]
@@ -332,6 +377,7 @@ public partial class CatalogoViewModel : ObservableObject
     [RelayCommand]
     private void ActivarPanelVer()
     {
+        PanelInicio = false;
         PanelAniadir = false;
         PanelDonar = false;
         PanelEliminar = false;
@@ -340,6 +386,7 @@ public partial class CatalogoViewModel : ObservableObject
         PanelAyuda = false;
         contadorLista = 0;
         TextoContador = "Producto " + (contadorLista + 1) + " de " + Productos.Count + ":";
+        LimpiarPanelesDonacion();
         ProductosALista();
         ComprobarBotonesIndividual();
         IniciarCampos();
@@ -348,6 +395,7 @@ public partial class CatalogoViewModel : ObservableObject
     [RelayCommand]
     private void ActivarPanelAniadir()
     {
+        PanelInicio = false;
         PanelAniadir = true;
         PanelDonar = false;
         PanelEliminar = false;
@@ -355,18 +403,21 @@ public partial class CatalogoViewModel : ObservableObject
         PanelVer = false;
         PanelAyuda = false;
         LimpiarCampos();
+        LimpiarPanelesDonacion();
         Foto = ImagenPorDefecto;
     }
     
     [RelayCommand]
     private void ActivarPanelEliminar()
     {
+        PanelInicio = false;
         PanelAniadir = false;
         PanelDonar = false;
         PanelEliminar = true;
         PanelInfo = false;
         PanelVer = false;
         PanelAyuda = false;
+        LimpiarPanelesDonacion();
         ProductosALista();
         IniciarCampos();
     }
@@ -374,6 +425,7 @@ public partial class CatalogoViewModel : ObservableObject
     [RelayCommand]
     private void ActivarPanelInfo()
     {
+        PanelInicio = false;
         PanelAniadir = false;
         PanelDonar = false;
         PanelEliminar = false;
@@ -381,12 +433,16 @@ public partial class CatalogoViewModel : ObservableObject
         PanelVer = false;
         PanelAyuda = false;
         LimpiarCampos();
+        LimpiarPanelesDonacion();
         Foto = ImagenPorDefecto;
     }
     
     [RelayCommand]
     private void ActivarPanelDonar()
     {
+        PanelInicio = false;
+        CantidadDonacion = 0.0;
+        ComprobarImagenDonacion();
         PanelAniadir = false;
         PanelDonar = true;
         PanelEliminar = false;
@@ -394,12 +450,14 @@ public partial class CatalogoViewModel : ObservableObject
         PanelVer = false;
         PanelAyuda = false;
         LimpiarCampos();
+        LimpiarPanelesDonacion();
         Foto = ImagenPorDefecto;
     }
     
     [RelayCommand]
     private void ActivarPanelAyuda()
     {
+        PanelInicio = false;
         PanelAniadir = false;
         PanelDonar = false;
         PanelEliminar = false;
@@ -407,6 +465,7 @@ public partial class CatalogoViewModel : ObservableObject
         PanelVer = false;
         PanelAyuda = true;
         LimpiarCampos();
+        LimpiarPanelesDonacion();
         Foto = ImagenPorDefecto;
     }
 
@@ -461,43 +520,6 @@ public partial class CatalogoViewModel : ObservableObject
         }
         
     }
-
-    private void LimpiarCampos()
-    {
-        Nombre = string.Empty;
-        Marca = string.Empty;
-        Descripcion = string.Empty;
-        Precio = 0.0;
-        Stock = 0;
-        Categoria = string.Empty;
-        OtraInformacion = string.Empty;
-        Foto = ImagenPorDefecto;
-        TextoContador = "Producto 0 de 0:";
-    }
-
-    private void IniciarCampos()
-    {
-        if (Productos != null && Productos.Count > 0 && contadorLista >= 0 && contadorLista < Productos.Count)
-        { 
-            TextoContador = "Producto " + (contadorLista + 1) + " de " + Productos.Count + ":";
-            Nombre = Productos[contadorLista].Nombre;
-            Marca = Productos[contadorLista].Marca;
-            Descripcion = Productos[contadorLista].Descripcion;
-            Precio = Productos[contadorLista].Precio; 
-            Stock = Productos[contadorLista].Stock; 
-            Categoria = Productos[contadorLista].Categoria; 
-            OtraInformacion = Productos[contadorLista].OtraInformacion; 
-            Foto = Productos[contadorLista].Foto;
-        }
-        else
-        {
-            LimpiarCampos();
-        }
-        
-    }
-
-    
-    
     
     
     // Implementación de INotifyPropertyChanged
