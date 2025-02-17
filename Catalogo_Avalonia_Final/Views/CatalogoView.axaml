@@ -20,31 +20,31 @@
                         <Menu DockPanel.Dock="Top">
                                 
                                 <!-- Opciones para manejar varias base de datos de articulos:-->
-                                <MenuItem Header="_Catálogo" Foreground="Azure">
+                                <MenuItem Header="_Catálogo" Foreground="DarkSlateGray" FontWeight="SemiBold">
                                         <MenuItem Header="_Nuevo.." />
                                         <MenuItem Header="_Abrir.." />
                                         <MenuItem Header="_Guardar.." />
                                         <Separator />
                                         <MenuItem Header="_Salir.." Command="{Binding ExitApplicationCommand}"/>
                                 </MenuItem>
-                                
+                                <Separator Width="5"/>
                                 <!-- Menu de articulos para su manejo: -->
-                                <MenuItem Header="_Artículo" Foreground="Azure">
+                                <MenuItem Header="_Artículo" Foreground="DarkSlateGray" FontWeight="SemiBold">
                                         <MenuItem Header="_Ver Artículos.." Command="{Binding ActivarPanelVerCommand}"/>
                                         <MenuItem Header="_Añadir Artículo.." Command="{Binding ActivarPanelAniadirCommand}"/>
                                         <Separator />
                                         <MenuItem Header="_Eliminar Artículo.." Command="{Binding ActivarPanelEliminarCommand}"/>
                                 </MenuItem>
-                                
+                                <Separator Width="5"/>
                                 <!-- Menu Acerca de.. con informaciond del equipo y un panel donar: -->
-                                <MenuItem Header="_Acerca de.." Foreground="Azure">
+                                <MenuItem Header="_Acerca de.." Foreground="DarkSlateGray" FontWeight="SemiBold">
                                         <MenuItem Header="_Información Team.." Command="{Binding ActivarPanelInfoCommand}" />
                                         <Separator />
                                         <MenuItem Header="_Donate.." Command="{Binding ActivarPanelDonarCommand}"/>
                                 </MenuItem>
-                                
+                                <Separator Width="5" />
                                 <!-- Menu para la ayuda: -->
-                                <MenuItem Header="_Ayuda" Foreground="Azure">
+                                <MenuItem Header="_Ayuda" Foreground="DarkSlateGray" FontWeight="SemiBold">
                                         <MenuItem Header="_Ayuda usuario.." Command="{Binding ActivarPanelAyudaCommand}"/>
                                 </MenuItem>
                         </Menu>
@@ -61,7 +61,8 @@
                                 
                         <!-- Parte Izquierda Panel -->
                                 <StackPanel  Grid.Column="0" Orientation="Vertical" VerticalAlignment="Top"  Spacing="20" Background="CadetBlue" Height="380" Width="180" Margin="0,10">
-                                        <TextBlock Text="Añadir Artículo" Background="Azure" Foreground="CadetBlue" FontStyle="Oblique" FontWeight="Bold" FontSize="28" TextWrapping="Wrap" HorizontalAlignment="Center" Margin="5,5,0,0" />
+                                        <TextBlock Text="Añadir" Background="Azure" Foreground="CadetBlue" FontStyle="Oblique" FontWeight="Bold" FontSize="28" TextWrapping="Wrap" HorizontalAlignment="Left" Margin="5,5,0,0" />
+                                        <TextBlock Text="Artículo" Background="Azure" Foreground="CadetBlue" FontStyle="Oblique" FontWeight="Bold" FontSize="28" TextWrapping="Wrap" HorizontalAlignment="Right" Margin="0,-20,5,0" />
                                         <Button Content="Guardar" 
                                                 Width="150"
                                                 Height="70"
@@ -88,37 +89,37 @@
                         <!-- Parte Derecha Panel -->
                                 <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center" >
                                         <Grid ColumnDefinitions="400,180" RowDefinitions="*">
-                                                <StackPanel  Grid.Column="0" Orientation="Vertical" >
+                                                <StackPanel  Grid.Column="0" Orientation="Vertical">
                                                         <StackPanel Background="CadetBlue" Orientation="Vertical" Margin="0" Spacing="20" Width="350" Height="360">
-                                                                <StackPanel Background="LightGray" Orientation="Vertical" Margin="5" Spacing="20" Width="350">
+                                                                <StackPanel Background="LightGray" Orientation="Vertical" Margin="5" Spacing="20" Width="350" Height="355">
                                                                         <StackPanel Orientation="Horizontal" Spacing="50"  Background="Azure"  Margin="5"  >
-                                                                                <TextBlock Text="Nombre:" MinWidth="80" VerticalAlignment="Center" FontSize="20" />
+                                                                                <TextBlock Foreground="Black" Text="Nombre:" MinWidth="80" VerticalAlignment="Center" FontSize="20" />
                                                                                 <TextBox Name="TextoNombre" FontSize="15" Width="200" Height="15" />
                                                                         </StackPanel>
                                                                         <StackPanel Orientation="Horizontal" Spacing="52" Background="Azure"  Margin="5" >
-                                                                                <TextBlock Text="Marca:" MinWidth="80" VerticalAlignment="Center" FontSize="20"/>
+                                                                                <TextBlock Foreground="Black" Text="Marca:" MinWidth="80" VerticalAlignment="Center" FontSize="20"/>
                                                                                 <TextBox Name="TextoMarca" FontSize="15" Width="200" Height="15"/>
                                                                         </StackPanel>
                                                                         <StackPanel Orientation="Horizontal"  Spacing="34" Background="Azure"   Margin="5" >
-                                                                                <TextBlock Text="Categoría:" MinWidth="80" VerticalAlignment="Center" FontSize="20"/>
-                                                                                <ComboBox PlaceholderText="Selecciona Categoría" Width="200">
-                                                                                        <ComboBoxItem>Sonido</ComboBoxItem>
-                                                                                        <ComboBoxItem>Video</ComboBoxItem>
-                                                                                        <ComboBoxItem>Raton</ComboBoxItem>
-                                                                                        <ComboBoxItem>Teclado</ComboBoxItem>
+                                                                                <TextBlock Foreground="Black" Text="Categoría:" MinWidth="80" VerticalAlignment="Center" FontSize="20"/>
+                                                                                <ComboBox  PlaceholderText="Selecciona Categoría" Width="200">
+                                                                                        <ComboBoxItem >Sonido</ComboBoxItem>
+                                                                                        <ComboBoxItem >Video</ComboBoxItem>
+                                                                                        <ComboBoxItem >Raton</ComboBoxItem>
+                                                                                        <ComboBoxItem >Teclado</ComboBoxItem>
                                                                                 </ComboBox>
                                                                         </StackPanel>
                                                                         <StackPanel Orientation="Horizontal" Spacing="52" Background="Azure"  Margin="5" >
-                                                                                <TextBlock Text="Stock:" MinWidth="80" VerticalAlignment="Center" FontSize="20"/>
+                                                                                <TextBlock Foreground="Black" Text="Stock:" MinWidth="80" VerticalAlignment="Center" FontSize="20"/>
                                                                                 <TextBox Name="TextoStock" FontSize="15" Width="200" Height="15"/>
                                                                         </StackPanel>
                                                                         <StackPanel Orientation="Horizontal" Spacing="13" Background="Azure"  Margin="5" >
-                                                                                <TextBlock Text="Descripción:" MinWidth="80" VerticalAlignment="Center" FontSize="20"/>
+                                                                                <TextBlock Foreground="Black" Text="Descripción:" MinWidth="80" VerticalAlignment="Center" FontSize="20"/>
                                                                                 <TextBox Name="TextoDescripcion" FontSize="15" Width="200" Height="30"/>
                                                                         </StackPanel>
                                                                         <StackPanel Orientation="Horizontal" Spacing="13"  Background="Azure"  Margin="5" >
-                                                                                <TextBlock Text="Otros datos:" MinWidth="80" VerticalAlignment="Center" FontSize="20"/>
-                                                                                <TextBox Name="TextoOtrosDatos" FontSize="15" Width="200" Height="30"/>
+                                                                                <TextBlock Foreground="Black" Text="Otros datos:" MinWidth="80" VerticalAlignment="Center" FontSize="20"/>
+                                                                                <TextBox  Name="TextoOtrosDatos" FontSize="15" Width="200" Height="30"/>
                                                                         </StackPanel>
                                                                 </StackPanel>
                                                         </StackPanel>
@@ -128,16 +129,18 @@
                                                                 <StackPanel Background="LightGray" Orientation="Vertical" Width="200" Height="355" Margin="5">
                                                                         <StackPanel Orientation="Vertical" Spacing="7"  Background="Azure"  Margin="5" >
                                                                                 <Image Name="Imagen" MaxHeight="350" MaxWidth="350" Source="{Binding Foto}"/>
-                                                                                <Button Content="CARGAR IMAGEN" 
-                                                                                        Width="220" 
-                                                                                        HorizontalAlignment="Center" 
-                                                                                        HorizontalContentAlignment="Center"
-                                                                                        Background="CadetBlue"
-                                                                                        Foreground="Azure"
-                                                                                        FontSize="20"/>
+                                                                                <StackPanel Background="DarkSlateGray">
+                                                                                        <Button Content="CARGAR IMAGEN" 
+                                                                                                Width="220" 
+                                                                                                HorizontalAlignment="Center" 
+                                                                                                HorizontalContentAlignment="Center"
+                                                                                                Background="CadetBlue"
+                                                                                                Foreground="Azure"
+                                                                                                FontSize="20"/>
+                                                                                </StackPanel>
                                                                         </StackPanel>
-                                                                        <StackPanel Orientation="Vertical" Spacing="7"  Background="Azure"  Margin="5" >
-                                                                                <TextBlock Text="Precio:" MinWidth="80" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
+                                                                        <StackPanel Orientation="Vertical" Spacing="7"  Background="Azure" Width="160" Height="100" Margin="5" >
+                                                                                <TextBlock Foreground="Black" Text="Precio:" MinWidth="80" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
                                                                                 <TextBox Name="TextoPrecio" FontSize="40" Width="150" Height="60"/>
                                                                         </StackPanel>
                                                                 </StackPanel>
@@ -152,7 +155,7 @@
                         <TabControl Name="PanelVer" IsVisible= "{Binding PanelVer}" Margin="5">
                                 
                         <!-- Pestaña Individual: -->
-                                <TabItem Header="Individual.." Foreground="Azure">
+                                <TabItem Header="Individual.." Background="DarkSlateGray" Foreground="White" Margin="15,0,0,0">
                                         <StackPanel Orientation="Horizontal" Spacing="10" Background="CadetBlue" Width="760" Height="340">
                                         
                                         <!-- Parte Izquierda Informacion: -->
@@ -160,7 +163,7 @@
                                                 <StackPanel Orientation="Vertical" Spacing="10" Background="Azure" Height="330" Width="480" Margin="5,0,0,0">
                                                 
                                                 <!-- Detalles del producto -->
-                                                        <TextBlock FontWeight="Bold" FontSize="30" Margin="5,0,0,0" Text="{Binding TextoContador}" />
+                                                        <TextBlock Foreground="Black" FontWeight="Bold" FontSize="30" Margin="5,0,0,0" Text="{Binding TextoContador}" />
                                                         <Grid>
                                                                 <Grid.RowDefinitions>
                                                                         <RowDefinition Height="Auto" />
@@ -178,34 +181,34 @@
                                                                 </Grid.ColumnDefinitions>
 
                                                         <!-- Nombre -->
-                                                                <TextBlock Grid.Row="0" Grid.Column="0" FontSize="20" Margin="5,0,0,0" Text="Nombre:" FontWeight="Bold"  />
-                                                                <TextBlock Grid.Row="0" Grid.Column="1" Width="300" Text="{Binding Nombre}" FontSize="20" Margin="77,0,0,0" />
+                                                                <TextBlock Foreground="Black" Grid.Row="0" Grid.Column="0" FontSize="20" Margin="5,0,0,0" Text="Nombre:" FontWeight="Bold"  />
+                                                                <TextBlock Foreground="Black" Grid.Row="0" Grid.Column="1" Width="300" Text="{Binding Nombre}" FontSize="20" Margin="77,0,0,0" />
 
                                                         <!-- Marca -->
-                                                                <TextBlock Grid.Row="1" Grid.Column="0" Text="Marca:" FontWeight="Bold" FontSize="20" Margin="5,0,0,0" />
-                                                                <TextBlock Grid.Row="1" Grid.Column="1" Width="300" Text="{Binding Marca}" FontSize="15" Margin="77,4,0,0" />
+                                                                <TextBlock Foreground="Black" Grid.Row="1" Grid.Column="0" Text="Marca:" FontWeight="Bold" FontSize="20" Margin="5,0,0,0" />
+                                                                <TextBlock Foreground="Black" Grid.Row="1" Grid.Column="1" Width="300" Text="{Binding Marca}" FontSize="15" Margin="77,4,0,0" />
 
                                                         <!-- Categoría -->
-                                                                <TextBlock Grid.Row="2" Grid.Column="0" Text="Categoría:" FontWeight="Bold" FontSize="20" Margin="5,0,0,0" />
-                                                                <TextBlock Grid.Row="2" Grid.Column="1" Width="300" Text="{Binding Categoria}" FontSize="15" Margin="77,4,0,0" />
+                                                                <TextBlock Foreground="Black" Grid.Row="2" Grid.Column="0" Text="Categoría:" FontWeight="Bold" FontSize="20" Margin="5,0,0,0" />
+                                                                <TextBlock Foreground="Black" Grid.Row="2" Grid.Column="1" Width="300" Text="{Binding Categoria}" FontSize="15" Margin="77,4,0,0" />
                                                                 
                                                         <!-- Stock -->
-                                                                <TextBlock Grid.Row="3" Grid.Column="0" Text="Stock:" FontWeight="Bold" FontSize="20" Margin="5,0,0,0" />
-                                                                <TextBlock Grid.Row="3" Grid.Column="1" Width="300" Text="{Binding Stock}" FontSize="15" Margin="77,4,0,0" />
+                                                                <TextBlock Foreground="Black" Grid.Row="3" Grid.Column="0" Text="Stock:" FontWeight="Bold" FontSize="20" Margin="5,0,0,0" />
+                                                                <TextBlock Foreground="Black" Grid.Row="3" Grid.Column="1" Width="300" Text="{Binding Stock}" FontSize="15" Margin="77,4,0,0" />
                                                                 
                                                         <!-- Descripción -->
-                                                                <TextBlock Grid.Row="4" Grid.Column="0" Text="Descripción:" FontWeight="Bold" FontSize="20" Margin="5,0,0,0" />
-                                                                <TextBlock Grid.Row="4" Grid.Column="1" Width="300" Height="60" TextWrapping="Wrap"  MaxLines="3" Text="{Binding Categoria}" FontSize="15" Margin="77,4,0,0" />
+                                                                <TextBlock Foreground="Black" Grid.Row="4" Grid.Column="0" Text="Descripción:" FontWeight="Bold" FontSize="20" Margin="5,0,0,0" />
+                                                                <TextBlock Foreground="Black" Grid.Row="4" Grid.Column="1" Width="300" Height="60" TextWrapping="Wrap"  MaxLines="3" Text="{Binding Categoria}" FontSize="15" Margin="77,4,0,0" />
                                                                 
                                                         <!-- Otra Información -->
-                                                                <TextBlock Grid.Row="5" Grid.Column="0" Text="Otra Información:" FontWeight="Bold" FontSize="20" Margin="5,0,0,0" />
-                                                                <TextBlock Grid.Row="5" Grid.Column="1" Width="300" Height="60" TextWrapping="Wrap" MaxLines="3" Text="{Binding OtraInformacion}" FontSize="15" Margin="77, 4,0,0" />
+                                                                <TextBlock Foreground="Black" Grid.Row="5" Grid.Column="0" Text="Otra Información:" FontWeight="Bold" FontSize="20" Margin="5,0,0,0" />
+                                                                <TextBlock Foreground="Black" Grid.Row="5" Grid.Column="1" Width="300" Height="60" TextWrapping="Wrap" MaxLines="3" Text="{Binding OtraInformacion}" FontSize="15" Margin="77, 4,0,0" />
                                                                 
                                                         </Grid>
                                                 
                                                 <!-- Botones de navegación -->
-                                                        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="15" Margin="0,-10,0,0">
-                                                                <Button Content="Primero" IsEnabled="{Binding Anterior}" HorizontalContentAlignment="Center" Background="CadetBlue" Command="{Binding PrimerProductoCommand}" Width="100" />
+                                                        <StackPanel DockPanel.Dock="Bottom" Width="460" Height="50" Background="DarkSlateGray" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="15" Margin="0,-20,0,0">
+                                                                <Button Content="Primero" IsEnabled="{Binding Anterior}" HorizontalContentAlignment="Center" Background="CadetBlue" Command="{Binding PrimerProductoCommand}" Width="100" Margin="10,0,0,0"/>
                                                                 <Button Content="Anterior" IsEnabled="{Binding Anterior}" HorizontalContentAlignment="Center" Background="CadetBlue" Command="{Binding AnteriorProductoCommand}" Width="100" />
                                                                 <Button Content="Siguiente" IsEnabled="{Binding Siguiente}" HorizontalContentAlignment="Center" Background="CadetBlue" Command="{Binding SiguienteProductoCommand}" Width="100" />
                                                                 <Button Content="Último" IsEnabled="{Binding Siguiente}" HorizontalContentAlignment="Center" Background="CadetBlue" Command="{Binding UltimoProductoCommand}" Width="100" />
@@ -219,7 +222,9 @@
                                                 <!-- Foto -->
                                                         <Image Source="{Binding Foto}" Width="200" Height="200" Margin="5" />
                                                 <!-- Precio -->
-                                                        <TextBlock  FontWeight="Bold" FontSize="30" TextAlignment="Center" Text="{Binding Precio, StringFormat={}{0:C}}" Margin="5" />
+                                                        <TextBlock Foreground="Black" FontWeight="Bold" FontSize="40" TextAlignment="Center" 
+                                                                   Text="{Binding Precio, StringFormat={}{0:C}}" Margin="20,40,0,0" 
+                                                                   />
                                                 </StackPanel>
                                                 
                                         </StackPanel>
@@ -227,7 +232,7 @@
                                 </TabItem>
                         
                         <!-- Pestaña Lista: -->
-                                <TabItem Header="Listado.." Foreground="Azure">
+                                <TabItem Header="Listado.." Background="DarkSlateGray" Foreground="White" Margin="15,0,0,0"  >
                                         
                                         <StackPanel Background="CadetBlue" Width="760" Height="340" Spacing="">
                                                 <ListBox Background="Azure" Width="750" Height="330" Margin="5" VerticalAlignment="Bottom" 
@@ -238,7 +243,7 @@
                                                                 <DataTemplate>
                                                                         <Border BorderBrush="CadetBlue" BorderThickness="2" 
                                                                                 CornerRadius="8" Padding="4" Width="720" Height="50">
-                                                                                <TextBlock VerticalAlignment="Center" Text="{Binding}" />
+                                                                                <TextBlock Foreground="Black" VerticalAlignment="Center" Text="{Binding}" />
                                                                         </Border>
                                                                 </DataTemplate>
                                                         </ListBox.ItemTemplate>
@@ -251,14 +256,14 @@
 						
                 <!-- Panel Eliminar: -->
                         <StackPanel Name="PanelEliminar" IsVisible= "{Binding PanelEliminar}" Margin="20,0,0,0">
-                                <StackPanel Orientation="Vertical" Background="CadetBlue" Width="760" Height="350" Spacing="10">
-                                        <ListBox Background="Azure" Width="750" Height="340" Margin="5" VerticalAlignment="Bottom" 
+                                <StackPanel Orientation="Vertical" Background="Azure" Width="760" Height="350" Spacing="10">
+                                        <ListBox Background="CadetBlue" Width="750" Height="340" Margin="5" VerticalAlignment="Bottom" 
                                                  ItemsSource="{Binding Productos}" 
                                                  ScrollViewer.VerticalScrollBarVisibility="Visible"
                                                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                                                 <ListBox.ItemTemplate>
                                                         <DataTemplate>
-                                                                <Border BorderBrush="CadetBlue" BorderThickness="2" 
+                                                                <Border BorderBrush="Azure" BorderThickness="2" 
                                                                         CornerRadius="8" Margin="5,5,5,15" Padding="4" Width="720" Height="50">
                                                                         <DockPanel LastChildFill="True">
                                                                                 <!-- Imagen pegada a la derecha -->
@@ -271,13 +276,18 @@
                                                                                 <!-- Contenedor para los detalles del producto -->
                                                                                 <StackPanel Orientation="Horizontal" Spacing="5" VerticalAlignment="Center">
                                                                                         <!-- CheckBox para selección -->
-                                                                                        <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" VerticalAlignment="Center" />
+                                                                                        <CheckBox x:Name="MyCheckBox"
+                                                                                                VerticalAlignment="Center"
+                                                                                                HorizontalAlignment="Center"
+                                                                                                Foreground="White"
+                                                                                                IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                                                                                                /> 
                 
                                                                                         <!-- Detalles del producto -->
-                                                                                        <TextBlock Text="{Binding Nombre}" FontSize="20" FontWeight="Bold" VerticalAlignment="Center" Margin="5,0,0,0" />
-                                                                                        <TextBlock Text="{Binding Marca}" VerticalAlignment="Center" Margin="5,0,0,0" />
-                                                                                        <TextBlock Text="{Binding Categoria}" VerticalAlignment="Center" Margin="5,0,0,0" />
-                                                                                        <TextBlock Text="{Binding Precio, StringFormat={}{0:C}}" VerticalAlignment="Center" Margin="5,0,0,0" />
+                                                                                        <TextBlock Foreground="Azure" Text="{Binding Nombre}" FontSize="20" FontWeight="Bold" VerticalAlignment="Center" Margin="5,0,0,0" />
+                                                                                        <TextBlock Foreground="Azure" Text="{Binding Marca}" VerticalAlignment="Center" Margin="5,0,0,0" />
+                                                                                        <TextBlock Foreground="Azure" Text="{Binding Categoria}" VerticalAlignment="Center" Margin="5,0,0,0" />
+                                                                                        <TextBlock Foreground="Azure" Text="{Binding Precio, StringFormat={}{0:C}}" VerticalAlignment="Center" Margin="5,0,0,0" />
                                                                                 </StackPanel>
                                                                         </DockPanel>
                                                                 </Border>
@@ -288,10 +298,11 @@
                                 </StackPanel>
                                 
                                 <!-- Botón para eliminar productos seleccionados -->
-                                <Button Content="Eliminar Seleccionados" Foreground="Azure" FontSize="16" 
-                                        Background="Brown" Command="{Binding EliminarProductosCommand}" HorizontalContentAlignment="Center"
-                                        VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="200" Height="45" Margin="6" />
-                                
+                                <StackPanel Background="DarkRed" Width="200" Height="45" HorizontalAlignment="Center" Margin="6" >
+                                        <Button Content="Eliminar Seleccionados" Foreground="Azure" FontSize="16" 
+                                                Background="Brown" Command="{Binding EliminarProductosCommand}" HorizontalContentAlignment="Center"
+                                                VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="200" Height="45" />
+                                </StackPanel>
                         </StackPanel>
                         
                         
@@ -320,32 +331,36 @@
                                         <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
                                 
-                                <TextBlock Text="¡Apoya nuestro proyecto!" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,5,0,0"/>
+                                <TextBlock Foreground="Black" Text="¡Apoya nuestro proyecto!" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,5,0,0"/>
                                 
                                 <StackPanel Grid.Row="1" Orientation="Vertical" Spacing="10">
-                                        <TextBlock Text="Tu donación nos ayuda a seguir mejorando." TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0" />
-                                        <TextBlock Text="Selecciona una cantidad de donación:" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                        <StackPanel Orientation="Horizontal" Spacing="10" HorizontalAlignment="Center">
-                                                <Button Content="+ 5.0€" Width="100" Height="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="CadetBlue"
-                                                        Command="{Binding DonarCincoCommand}" Foreground="Azure" FontWeight="Heavy"/>
-                                                <Button Content="+ 10.0€" Width="100" Height="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="CadetBlue" 
+                                        <TextBlock Foreground="Black" Text="Tu donación nos ayuda a seguir mejorando." TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0" />
+                                        <TextBlock Foreground="Black" Text="Selecciona una cantidad de donación:" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                        <StackPanel Background="DarkSlateGray" Width="340" Orientation="Horizontal" Spacing="10" HorizontalAlignment="Center">
+                                                <Button Content="+ 5.0€" Width="100" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                        HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="CadetBlue"
+                                                        Command="{Binding DonarCincoCommand}" Foreground="Azure" FontWeight="Heavy" Margin="10,0,0,0"/>
+                                                <Button Content="+ 10.0€" Width="100" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                        HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="CadetBlue" 
                                                         Command="{Binding DonarDiezCommand}" Foreground="Azure" FontWeight="Heavy"/>
-                                                <Button Content="+ 20.0€" Width="100" Height="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="CadetBlue" 
+                                                <Button Content="+ 20.0€" Width="100" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                        HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="CadetBlue" 
                                                         Command="{Binding DonarVeinteCommand}" Foreground="Azure" FontWeight="Heavy"/>
                                         </StackPanel>
                                 </StackPanel>
                                 
                                 <StackPanel Grid.Row="2" Orientation="Horizontal" Spacing="10">
-                                        <TextBlock FontSize="40" Width="300" Text="{Binding CantidadDonacion, StringFormat={}{0:C}}" HorizontalAlignment="Center" 
-                                                   VerticalAlignment="Center" TextWrapping="Wrap" Margin="190,20,10,10" />
+                                        <TextBlock Foreground="Black" FontSize="40" Width="300" Text="{Binding CantidadDonacion, StringFormat={}{0:C}}" HorizontalAlignment="Center" 
+                                                   VerticalAlignment="Center" TextWrapping="Wrap" Margin="190,30,10,10" />
                                         <Image Source="{Binding ImagenDonacion}" Margin="-120,80,0,0" Width="150" Height="150"> </Image>
                                 </StackPanel>
                                 
-                                <Button Content="Donar Ahora" Grid.Row="3" HorizontalAlignment="Center" Width="150" Height="40" Background="DarkRed" 
-                                        Foreground="White" FontWeight="Bold" HorizontalContentAlignment="Center"
-                                        VerticalContentAlignment="Center" FontSize="20" Margin="0,0,0,10"
-                                        Command="{Binding BotonDonarCommand}"/>
-                                
+                                <StackPanel Grid.Row="3" Background="DarkGreen" Width="150" Height="40" HorizontalAlignment="Center" Margin="0,0,0,10" >
+                                        <Button Content="Donar Ahora"  HorizontalAlignment="Center" Width="150" Height="40" Background="ForestGreen" 
+                                                Foreground="White" FontWeight="Bold" HorizontalContentAlignment="Center"
+                                                VerticalContentAlignment="Center" FontSize="20" 
+                                                Command="{Binding BotonDonarCommand}"/>
+                                </StackPanel>
                         </Grid>
 				 
                         </Canvas>
@@ -385,17 +400,18 @@
                                            Margin="0,20,0,0" />
                                 <StackPanel Grid.Row="1" Orientation="Vertical" Spacing="10">
                                         <TextBlock Text="¿Necesitas ayuda? Aquí encontrarás respuestas a tus preguntas frecuentes." TextWrapping="Wrap" HorizontalAlignment="Center" 
-                                                   FontSize="15" Margin="0,5,0,0"/>
-                                        <Expander Header="Cómo usar el catálogo" IsExpanded="True" FontSize="15" Margin="100,0,0,0">
+                                                   Foreground="Black" FontSize="15" Margin="0,5,0,0"/>
+                                        <Expander Header="Cómo usar el catálogo" Foreground="Azure" IsExpanded="True" FontSize="15" Margin="100,0,0,0">
                                                 <TextBlock Text="--> Para ver el listado haz clic en el submenú 'Ver Artículos..' y podras elegir entre las vistas disponibles, Individual o Listado." 
-                                                           FontSize="15" TextWrapping="Wrap" />
+                                                           Foreground="Azure" FontSize="15" TextWrapping="Wrap" />
                                         </Expander>
-                                        <Expander Header="Cómo añadir un artículo" FontSize="15" Margin="100,0,0,0">
+                                        <Expander Header="Cómo añadir un artículo" Foreground="Azure" FontSize="15" Margin="100,0,0,0">
                                                 <TextBlock Text="--> Para añadir un articulo selecciona en el submenú 'Añadir Artículo..' y completa los campos. Luego pulsa el botón para guardar el artículo." 
-                                                           FontSize="15" TextWrapping="Wrap" />
+                                                           Foreground="Azure" FontSize="15" TextWrapping="Wrap" />
                                         </Expander>
-                                        <Expander Header="Contacto" FontSize="15" Margin="100,0,0,0">
-                                                <TextBlock Text="--> Envíanos un correo a xzerohakerx@gmail.com para más ayuda o información." FontSize="15" TextWrapping="Wrap" />
+                                        <Expander Header="Contacto" Foreground="Azure" FontSize="15" Margin="100,0,0,0">
+                                                <TextBlock Text="--> Envíanos un correo a xzerohakerx@gmail.com para más ayuda o información." FontSize="15" 
+                                                           Foreground="Azure" TextWrapping="Wrap" />
                                         </Expander>
                                 </StackPanel>
                         </Grid>

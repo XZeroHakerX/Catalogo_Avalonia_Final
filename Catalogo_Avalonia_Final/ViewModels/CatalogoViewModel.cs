@@ -10,8 +10,10 @@ using System.Linq;
 using System.Reactive;
 using System.Text;
 using System.Threading.Tasks;
+using Avalonia;
 using ReactiveUI;
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Layout;
 using Avalonia.Media;
 using DialogHostAvalonia;
@@ -99,7 +101,7 @@ public partial class CatalogoViewModel : ObservableObject
             Environment.Exit(0);
         });
     }
-
+    
     // Metodo que inicia las listas y los campos:
     private void IniciaListaProductos()
     {
@@ -312,11 +314,15 @@ public partial class CatalogoViewModel : ObservableObject
                 new StackPanel
                 {
                     Orientation = Orientation.Vertical,
+                    Width = 400,
+                    Height = 70,
                     Spacing = 10,
-                    Background = new SolidColorBrush(Color.FromArgb(240,250,100,100)),
+                    Background = new SolidColorBrush(Color.FromArgb(255,50,50,50)),
                     Children =
                     {
-                        new TextBlock { Text = "No has seleccionado ningún producto para eliminar.",Foreground = new SolidColorBrush(Colors.Azure), FontWeight = FontWeight.Bold },
+                        new TextBlock { Text = "No has seleccionado ningún producto para eliminar.",Foreground = new SolidColorBrush(Colors.Azure), 
+                            FontWeight = FontWeight.Bold, HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center, 
+                            VerticalAlignment = Avalonia.Layout.VerticalAlignment.Center, Margin = new Thickness(5)},
                         new Button
                         {
                             Content = "OK",
@@ -339,16 +345,21 @@ public partial class CatalogoViewModel : ObservableObject
         var result = await DialogHost.Show(
             new StackPanel
             {
+                Width = 400,
+                Height = 70,
+                Spacing = 10,
+                Background = new SolidColorBrush(Color.FromArgb(255,50,50,50)),
                 Children =
                 {
                     new TextBlock { Text = $"¿Estás seguro de que quieres eliminar {productosSeleccionados.Count} producto(s)?", 
-                        Foreground = new SolidColorBrush(Colors.Azure), FontWeight = FontWeight.Bold },
+                        Foreground = new SolidColorBrush(Colors.Azure), FontWeight = FontWeight.Bold, HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center, 
+                        VerticalAlignment = Avalonia.Layout.VerticalAlignment.Center, Margin = new Thickness(5)},
                     new StackPanel
                     {
                         Orientation = Orientation.Horizontal,
                         Spacing = 10,
                         HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center,
-                        Background = new SolidColorBrush(Color.FromArgb(240,250,100,100)),
+                        Background = new SolidColorBrush(Color.Parse("#600000")),
                         Children =
                         {
                             new Button
