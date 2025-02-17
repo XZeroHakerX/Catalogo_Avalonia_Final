@@ -42,6 +42,8 @@ public partial class CatalogoViewModel : ObservableObject
     [ObservableProperty] public string _textoContador;
     [ObservableProperty] public double _cantidadDonacion;
     [ObservableProperty] public Bitmap _imagenDonacion;
+    [ObservableProperty] public Bitmap _imagenEmpresa;
+    
     [ObservableProperty] public bool _siguiente;
     [ObservableProperty] public bool _anterior;
     
@@ -69,6 +71,7 @@ public partial class CatalogoViewModel : ObservableObject
         ActivarPanelDonacionDos = false;
         ActivarPanelDonacionTres = false;
         ImagenDonacion = null;
+        ImagenEmpresa = new Bitmap(AssetLoader.Open(new Uri("avares://Catalogo_Avalonia_Final/Assets/empresa.png")));
         CantidadDonacion = 0.0;
         TextoContador = "Producto 0 de 0:";
         IniciaListaProductos();
