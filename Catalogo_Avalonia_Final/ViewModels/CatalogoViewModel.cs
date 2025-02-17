@@ -316,10 +316,12 @@ public partial class CatalogoViewModel : ObservableObject
                     Background = new SolidColorBrush(Color.FromArgb(240,250,100,100)),
                     Children =
                     {
-                        new TextBlock { Text = "No has seleccionado ningún producto para eliminar.", FontWeight = FontWeight.Bold },
+                        new TextBlock { Text = "No has seleccionado ningún producto para eliminar.",Foreground = new SolidColorBrush(Colors.Azure), FontWeight = FontWeight.Bold },
                         new Button
                         {
                             Content = "OK",
+                            Foreground = new SolidColorBrush(Colors.Azure),
+                            Background = new SolidColorBrush(Colors.CadetBlue),
                             HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center,
                             Command = new RelayCommand(() =>
                             {
@@ -339,17 +341,20 @@ public partial class CatalogoViewModel : ObservableObject
             {
                 Children =
                 {
-                    new TextBlock { Text = $"¿Estás seguro de que quieres eliminar {productosSeleccionados.Count} producto(s)?", FontWeight = FontWeight.Bold },
+                    new TextBlock { Text = $"¿Estás seguro de que quieres eliminar {productosSeleccionados.Count} producto(s)?", 
+                        Foreground = new SolidColorBrush(Colors.Azure), FontWeight = FontWeight.Bold },
                     new StackPanel
                     {
                         Orientation = Orientation.Horizontal,
                         Spacing = 10,
+                        HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center,
                         Background = new SolidColorBrush(Color.FromArgb(240,250,100,100)),
                         Children =
                         {
                             new Button
                             {
                                 Content = "Aceptar",
+                                Foreground = new SolidColorBrush(Colors.Azure),
                                 Background = new SolidColorBrush(Colors.OrangeRed),
                                 HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center,
                                 Command = new RelayCommand(() =>
@@ -361,6 +366,7 @@ public partial class CatalogoViewModel : ObservableObject
                             new Button
                             {
                                 Content = "Cancelar",
+                                Foreground = new SolidColorBrush(Colors.Azure),
                                 Background = new SolidColorBrush(Colors.CadetBlue),
                                 HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center,
                                 Command = new RelayCommand(() =>
