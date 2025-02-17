@@ -140,3 +140,7 @@ C:\Users\Zero\Desktop\Proyectos\Catalogo_Avalonia_Final\Catalogo_Avalonia_Final\
 C:\Users\Zero\Desktop\Proyectos\Catalogo_Avalonia_Final\Catalogo_Avalonia_Final\bin\Debug\net8.0\Material.Colors.dll
 C:\Users\Zero\Desktop\Proyectos\Catalogo_Avalonia_Final\Catalogo_Avalonia_Final\bin\Debug\net8.0\Material.Ripple.dll
 C:\Users\Zero\Desktop\Proyectos\Catalogo_Avalonia_Final\Catalogo_Avalonia_Final\bin\Debug\net8.0\Material.Styles.dll
+C:\Users\Zero\Desktop\Proyectos\Catalogo_Avalonia_Final\Catalogo_Avalonia_Final\bin\Debug\net8.0\DynamicData.dll
+C:\Users\Zero\Desktop\Proyectos\Catalogo_Avalonia_Final\Catalogo_Avalonia_Final\bin\Debug\net8.0\ReactiveUI.dll
+C:\Users\Zero\Desktop\Proyectos\Catalogo_Avalonia_Final\Catalogo_Avalonia_Final\bin\Debug\net8.0\Splat.dll
+C:\Users\Zero\Desktop\Proyectos\Catalogo_Avalonia_Final\Catalogo_Avalonia_Final\bin\Debug\net8.0\System.Reactive.dll

@@ -24,6 +24,7 @@ C:\Users\Zero\.nuget\packages\avalonia.win32\11.2.1\lib\net8.0\Avalonia.Win32.dl
 C:\Users\Zero\.nuget\packages\avalonia.x11\11.2.1\lib\net8.0\Avalonia.X11.dll
 C:\Users\Zero\.nuget\packages\communitytoolkit.mvvm\8.4.0\lib\net8.0\CommunityToolkit.Mvvm.dll
 C:\Users\Zero\.nuget\packages\dialoghost.avalonia\0.9.2\lib\netstandard2.0\DialogHost.Avalonia.dll
+C:\Users\Zero\.nuget\packages\dynamicdata\9.0.4\lib\net8.0\DynamicData.dll
 C:\Users\Zero\.nuget\packages\harfbuzzsharp\7.3.0.2\lib\net6.0\HarfBuzzSharp.dll
 C:\Users\Zero\.nuget\packages\material.avalonia\3.9.2\lib\net8.0\Material.Avalonia.dll
 C:\Users\Zero\.nuget\packages\material.avalonia\3.9.2\lib\net8.0\Material.Colors.dll
@@ -37,7 +38,9 @@ C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.11\ref\net8.0\Micros
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.11\ref\net8.0\Microsoft.Win32.Registry.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.11\ref\net8.0\mscorlib.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.11\ref\net8.0\netstandard.dll
+C:\Users\Zero\.nuget\packages\reactiveui\20.1.63\lib\net8.0\ReactiveUI.dll
 C:\Users\Zero\.nuget\packages\skiasharp\2.88.8\lib\net6.0\SkiaSharp.dll
+C:\Users\Zero\.nuget\packages\splat\15.1.1\lib\net8.0\Splat.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.11\ref\net8.0\System.AppContext.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.11\ref\net8.0\System.Buffers.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.11\ref\net8.0\System.Collections.Concurrent.dll
@@ -119,6 +122,7 @@ C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.11\ref\net8.0\System
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.11\ref\net8.0\System.Numerics.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.11\ref\net8.0\System.Numerics.Vectors.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.11\ref\net8.0\System.ObjectModel.dll
+C:\Users\Zero\.nuget\packages\system.reactive\6.0.1\lib\net6.0\System.Reactive.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.11\ref\net8.0\System.Reflection.DispatchProxy.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.11\ref\net8.0\System.Reflection.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\8.0.11\ref\net8.0\System.Reflection.Emit.dll

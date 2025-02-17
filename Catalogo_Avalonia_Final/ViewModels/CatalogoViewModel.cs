@@ -7,10 +7,11 @@ using Catalogo_Avalonia_Final.Model;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Linq;
+using System.Reactive;
 using System.Text;
 using System.Threading.Tasks;
+using ReactiveUI;
 using Avalonia.Controls;
-using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Layout;
 using Avalonia.Media;
 using DialogHostAvalonia;
@@ -20,6 +21,7 @@ namespace Catalogo_Avalonia_Final.ViewModels;
 public partial class CatalogoViewModel : ObservableObject
 {
 
+    // Declaracion de propiedades del objeto Producto:
     [ObservableProperty] public string? _nombre;
     [ObservableProperty] public string? _marca;
     [ObservableProperty] public string? _descripcion;
@@ -29,6 +31,7 @@ public partial class CatalogoViewModel : ObservableObject
     [ObservableProperty] public string? _otraInformacion;
     [ObservableProperty] public Bitmap? _foto;
 
+    // Declaracion de propiedades de activacion de paneles:
     [ObservableProperty] public bool _panelInicio;
     [ObservableProperty] public bool _panelAniadir;
     [ObservableProperty] public bool _panelVer;
@@ -40,26 +43,34 @@ public partial class CatalogoViewModel : ObservableObject
     [ObservableProperty] public bool _activarPanelDonacionDos;
     [ObservableProperty] public bool _activarPanelDonacionTres;
         
-    [ObservableProperty] public string _textoContador;
+    // Declaracion del panel donacion:
     [ObservableProperty] public double _cantidadDonacion;
     [ObservableProperty] public Bitmap _imagenDonacion;
     [ObservableProperty] public Bitmap _imagenEmpresa;
     [ObservableProperty] public Bitmap _imagenEmpresaFondo;
     
+    // Declaracion de las variables para los botones:
     [ObservableProperty] public bool _siguiente;
     [ObservableProperty] public bool _anterior;
     
+    // Declaracion de las listas y el texto de contador de las mismas:
+    [ObservableProperty] public string _textoContador;
     [ObservableProperty] public AvaloniaList<Producto>? _productos;
     [ObservableProperty] public AvaloniaList<String>? _productosLista;
     
-    private int contadorLista = 0;
+    // Comando para cerrar la aplicación
+    public ReactiveCommand<Unit, Unit> ExitApplicationCommand { get; }
     
+    // Declaracion e inicializacion de las imagenes y contador:
+    private int contadorLista = 0;
     private Bitmap? ImagenPorDefecto { get; } = new Bitmap(AssetLoader.Open(new Uri("avares://Catalogo_Avalonia_Final/Assets/avatar.png")));
     private Bitmap? ImagenCaraUno { get; } = new Bitmap(AssetLoader.Open(new Uri("avares://Catalogo_Avalonia_Final/Assets/cara1.png")));
     private Bitmap? ImagenCaraDos { get; } = new Bitmap(AssetLoader.Open(new Uri("avares://Catalogo_Avalonia_Final/Assets/cara2.png")));
     private Bitmap? ImagenCaraTres { get; } = new Bitmap(AssetLoader.Open(new Uri("avares://Catalogo_Avalonia_Final/Assets/cara3.png")));
+   
     
 
+    // Constructor:
     public CatalogoViewModel()
     {
         LimpiarCampos();
@@ -80,8 +91,16 @@ public partial class CatalogoViewModel : ObservableObject
         TextoContador = "Producto 0 de 0:";
         IniciaListaProductos();
         ComprobarBotonesIndividual();
+        
+        // Define el comando para cerrar la aplicación
+        ExitApplicationCommand = ReactiveCommand.Create(() =>
+        {
+            // Cierra la aplicación
+            Environment.Exit(0);
+        });
     }
 
+    // Metodo que inicia las listas y los campos:
     private void IniciaListaProductos()
     {
         Productos = new AvaloniaList<Producto>
@@ -102,6 +121,28 @@ public partial class CatalogoViewModel : ObservableObject
         ProductosLista = new AvaloniaList<String>();
     }
 
+    private void IniciarCampos()
+    {
+        if (Productos != null && Productos.Count > 0 && contadorLista >= 0 && contadorLista < Productos.Count)
+        { 
+            TextoContador = "Producto " + (contadorLista + 1) + " de " + Productos.Count + ":";
+            Nombre = Productos[contadorLista].Nombre;
+            Marca = Productos[contadorLista].Marca;
+            Descripcion = Productos[contadorLista].Descripcion;
+            Precio = Productos[contadorLista].Precio; 
+            Stock = Productos[contadorLista].Stock; 
+            Categoria = Productos[contadorLista].Categoria; 
+            OtraInformacion = Productos[contadorLista].OtraInformacion; 
+            Foto = Productos[contadorLista].Foto;
+        }
+        else
+        {
+            LimpiarCampos();
+        }
+        
+    }
+    
+    // Metodo para pasar la lista de productos a una lista de string:
     private void ProductosALista()
     {
         ProductosLista.Clear();
@@ -116,6 +157,7 @@ public partial class CatalogoViewModel : ObservableObject
         } 
     }
 
+    // Metodos para la comprobacion necesaria de botones e imagenes:
     private void ComprobarBotonesIndividual()
     {
         if (contadorLista == Productos.Count - 1)
@@ -164,6 +206,7 @@ public partial class CatalogoViewModel : ObservableObject
         }
     }
     
+    // Metodos para limpiar los componentes:
     private void LimpiarCampos()
     {
         Nombre = string.Empty;
@@ -176,28 +219,7 @@ public partial class CatalogoViewModel : ObservableObject
         Foto = ImagenPorDefecto;
         TextoContador = "Producto 0 de 0:";
     }
-
-    private void IniciarCampos()
-    {
-        if (Productos != null && Productos.Count > 0 && contadorLista >= 0 && contadorLista < Productos.Count)
-        { 
-            TextoContador = "Producto " + (contadorLista + 1) + " de " + Productos.Count + ":";
-            Nombre = Productos[contadorLista].Nombre;
-            Marca = Productos[contadorLista].Marca;
-            Descripcion = Productos[contadorLista].Descripcion;
-            Precio = Productos[contadorLista].Precio; 
-            Stock = Productos[contadorLista].Stock; 
-            Categoria = Productos[contadorLista].Categoria; 
-            OtraInformacion = Productos[contadorLista].OtraInformacion; 
-            Foto = Productos[contadorLista].Foto;
-        }
-        else
-        {
-            LimpiarCampos();
-        }
-        
-    }
-
+    
     private void LimpiarPanelesDonacion()
     {
         ActivarPanelDonacionUno = false;
@@ -205,6 +227,8 @@ public partial class CatalogoViewModel : ObservableObject
         ActivarPanelDonacionTres = false;
     }
     
+    
+    // Metodos para la pantalla de donacion:
     [RelayCommand]
     private void DonarCinco()
     {
@@ -268,6 +292,8 @@ public partial class CatalogoViewModel : ObservableObject
         return;
     }
     
+    
+    // Metodo para gestion de los productos:
     [RelayCommand]
     private async Task EliminarProductos()
     {
@@ -374,6 +400,8 @@ public partial class CatalogoViewModel : ObservableObject
         
     }
     
+    
+    // Metodos activadores de paneles:
     [RelayCommand]
     private void ActivarPanelVer()
     {
@@ -469,6 +497,8 @@ public partial class CatalogoViewModel : ObservableObject
         Foto = ImagenPorDefecto;
     }
 
+    
+    // Metodos para el control de los articulos en la vista individual:
     [RelayCommand]
     private void SiguienteProducto()
     {
@@ -531,3 +561,5 @@ public partial class CatalogoViewModel : ObservableObject
     }
     
 }
+
+
