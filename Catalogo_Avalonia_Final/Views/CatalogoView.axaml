@@ -9,6 +9,8 @@
         Width="800" Height="450"
         x:Class="Catalogo_Avalonia_Final.Views.CatalogoView"
         Title="Catalogo v2.0">
+        
+        <!-- Utilizamos como layout base un canvas para el manejo del cuadro de dialogo: -->
         <Canvas>
                 
                 <!-- Utilizamos un layout DockPanel, para establecer el menu en el top y los demas paneles en el center: -->
@@ -44,23 +46,25 @@
                                         <MenuItem Header="_Ayuda usuario.." Command="{Binding ActivarPanelAyudaCommand}"/>
                                 </MenuItem>
                         </Menu>
-
                         
+                 
                         <!-- Panel Aniadir: -->
                         <Grid Name="PanelAniadir" ColumnDefinitions="*,*" RowDefinitions="*" IsVisible="{Binding PanelAniadir}"  Margin="10" >
                                 
                                 <!-- Parte Izquierda Panel -->
-                                <StackPanel  Grid.Column="0" Orientation="Vertical" VerticalAlignment="Top"  Spacing="30" Background="CadetBlue" Height="380" Width="180" Margin="0,10">
-                                        <TextBlock Text="Añadir Artículo:" Background="Azure"  FontStyle="Oblique" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" Margin="0,10" />
+                                <StackPanel  Grid.Column="0" Orientation="Vertical" VerticalAlignment="Top"  Spacing="20" Background="CadetBlue" Height="380" Width="180" Margin="0,10">
+                                        <TextBlock Text="Añadir Artículo" Background="Azure" Foreground="CadetBlue" FontStyle="Oblique" FontWeight="Bold" FontSize="28" TextWrapping="Wrap" HorizontalAlignment="Center" Margin="5,5,0,0" />
                                         <Button Content="Guardar" 
-                                                Width="150" 
+                                                Width="150"
+                                                Height="70"
                                                 HorizontalAlignment="Center" 
                                                 HorizontalContentAlignment="Center"
+                                                VerticalContentAlignment="Center"
                                                 Background="Chartreuse"
                                                 Command=""
-                                                FontSize="20"
+                                                FontSize="30"
                                                 FontWeight="Bold"/>
-                                        <StackPanel  Orientation="Vertical" VerticalAlignment="Top" Margin="0,160">
+                                        <StackPanel  Orientation="Vertical" VerticalAlignment="Top" Margin="0,120">
                                                 <TextBlock Text="Si pulsas cancelar, se reiniciaran los campos:" HorizontalAlignment="Center" FontSize="10" Width="155" TextWrapping="Wrap"/>
                                                 <Button Content="Cancelar" 
                                                         Width="150" 
@@ -134,19 +138,17 @@
                                         </Grid>
                                 </StackPanel>
                         </Grid>
-				        
-
-
-        <!-- Panel Ver: -->
-                        <TabControl Name="PanelVer" IsVisible= "{Binding PanelVer}" Margin="20">
+						
+<!-- Panel Ver: -->
+                        <TabControl Name="PanelVer" IsVisible= "{Binding PanelVer}" Margin="5">
                                 
                                 <!-- Pestaña Individual: -->
                                 <TabItem Header="Individual.." Foreground="Azure">
-                                        <StackPanel Orientation="Horizontal" Spacing="10" Background="CadetBlue" Width="800" Height="320">
+                                        <StackPanel Orientation="Horizontal" Spacing="10" Background="CadetBlue" Width="760" Height="320">
                                                 <!-- Parte Izquierda Informacion: -->
                                                 
                                                 <DockPanel>
-                                                <StackPanel Orientation="Vertical" Spacing="10" Background="Azure" Height="310" Width="480" Margin="25,0,0,0">
+                                                <StackPanel Orientation="Vertical" Spacing="10" Background="Azure" Height="310" Width="480" Margin="5,0,0,0">
                                                         <!-- Detalles del producto -->
                                                         <TextBlock FontWeight="Bold" FontSize="30" Margin="5,0,0,0" Text="{Binding TextoContador}" />
                                                         <Grid>
@@ -217,7 +219,7 @@
                                 <!-- Pestaña Lista: -->
                                 <TabItem Header="Listado.." Foreground="Azure">
                                         
-                                        <StackPanel Background="CadetBlue" Width="800" Height="320" Spacing="10">
+                                        <StackPanel Background="CadetBlue" Width="760" Height="320" Spacing="">
                                                 <ListBox Background="Azure" Width="750" Height="310" Margin="5" VerticalAlignment="Bottom" 
                                                          ItemsSource="{Binding ProductosLista}"
                                                          ScrollViewer.VerticalScrollBarVisibility="Visible"
@@ -236,8 +238,9 @@
                                 </TabItem>
                         </TabControl>
                         
-                <!-- Panel Eliminar: -->
-                        <StackPanel Name="PanelEliminar" IsVisible= "{Binding PanelEliminar}" Margin="10">
+						
+<!-- Panel Eliminar: -->
+                        <StackPanel Name="PanelEliminar" IsVisible= "{Binding PanelEliminar}" Margin="20,0,0,0">
                                 <StackPanel Orientation="Vertical" Background="CadetBlue" Width="760" Height="350" Spacing="10">
                                         <ListBox Background="Azure" Width="750" Height="340" Margin="5" VerticalAlignment="Bottom" 
                                                  ItemsSource="{Binding Productos}" 
@@ -280,10 +283,72 @@
                                 
                         </StackPanel>
                         
+                <!-- Panel de donacion: -->
+                        <Canvas>
+                                <StackPanel IsVisible="{Binding ActivarPanelDonacionTres}" Background="Fuchsia" Width="620" Height="370" Margin="100,10,0,0">
+                                        <StackPanel IsVisible="{Binding ActivarPanelDonacionTres}" Background="Sienna" Width="600" Height="350" Margin="0,10,0,0">
+                                        </StackPanel>
+                                </StackPanel>
+                                <StackPanel IsVisible="{Binding ActivarPanelDonacionDos}" Background="DarkCyan" Width="580" Height="330" Margin="120,30,0,0">
+                                        <StackPanel IsVisible="{Binding ActivarPanelDonacionDos}" Background="CornflowerBlue" Width="560" Height="310" Margin="0,10,0,0">
+                                        </StackPanel>
+                                </StackPanel>
+                                
+                                <StackPanel IsVisible="{Binding ActivarPanelDonacionUno}" Background="Gold" Width="540" Height="290" Margin="140,50,0,0">
+                                        <StackPanel IsVisible="{Binding ActivarPanelDonacionUno}" Background="Chartreuse" Width="520" Height="270" Margin="0,10,0,0">
+                                        </StackPanel>
+                                </StackPanel>
+                                
+                                
+                        
+                        <Grid Background="Azure" IsVisible="{Binding PanelDonar}" Width="500" Height="250" Margin="160,70,0,0">
+                                
+                                <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                
+                                <TextBlock Text="¡Apoya nuestro proyecto!" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,5,0,0"/>
+                                
+                                <StackPanel Grid.Row="1" Orientation="Vertical" Spacing="10">
+                                        <TextBlock Text="Tu donación nos ayuda a seguir mejorando." TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0" />
+                                        <TextBlock Text="Selecciona una cantidad de donación:" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                        <StackPanel Orientation="Horizontal" Spacing="10" HorizontalAlignment="Center">
+                                                <Button Content="+ 5.0€" Width="100" Height="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="CadetBlue"
+                                                        Command="{Binding DonarCincoCommand}" Foreground="Azure" FontWeight="Heavy"/>
+                                                <Button Content="+ 10.0€" Width="100" Height="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="CadetBlue" 
+                                                        Command="{Binding DonarDiezCommand}" Foreground="Azure" FontWeight="Heavy"/>
+                                                <Button Content="+ 20.0€" Width="100" Height="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="CadetBlue" 
+                                                        Command="{Binding DonarVeinteCommand}" Foreground="Azure" FontWeight="Heavy"/>
+                                        </StackPanel>
+                                </StackPanel>
+                                
+                                <StackPanel Grid.Row="2" Orientation="Horizontal" Spacing="10">
+                                        <TextBlock FontSize="40" Width="300" Text="{Binding CantidadDonacion, StringFormat={}{0:C}}" HorizontalAlignment="Center" 
+                                                   VerticalAlignment="Center" TextWrapping="Wrap" Margin="190,20,10,10" />
+                                        <Image Source="{Binding ImagenDonacion}" Margin="-120,80,0,0" Width="150" Height="150"> </Image>
+                                </StackPanel>
+                                
+                                
+                                <Button Content="Donar Ahora" Grid.Row="3" HorizontalAlignment="Center" Width="150" Height="40" Background="DarkRed" 
+                                        Foreground="White" FontWeight="Bold" HorizontalContentAlignment="Center"
+                                        VerticalContentAlignment="Center" FontSize="20" Margin="0,0,0,10"
+                                        Command="{Binding BotonDonarCommand}"/>
+                                
+                        </Grid>
+				 
+                        </Canvas>
+
+
+        
+                
+                        
                         
                 </DockPanel>
                 
-                <dialogHost:DialogHost Identifier="MainDialogHost" Canvas.Left="210" Canvas.Top="300" Background="RosyBrown">
+                <dialogHost:DialogHost Identifier="MainDialogHost" Canvas.Left="210" Canvas.Top="300" Background="CadetBlue">
                                 
                         <!-- Contenido principal de la ventana -->
                         <Grid>

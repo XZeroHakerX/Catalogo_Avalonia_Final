@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Layout;
 using Avalonia.Media;
 using DialogHostAvalonia;
@@ -34,8 +35,13 @@ public partial class CatalogoViewModel : ObservableObject
     [ObservableProperty] public bool _panelInfo;
     [ObservableProperty] public bool _panelDonar;
     [ObservableProperty] public bool _panelAyuda;
-    
+    [ObservableProperty] public bool _activarPanelDonacionUno;
+    [ObservableProperty] public bool _activarPanelDonacionDos;
+    [ObservableProperty] public bool _activarPanelDonacionTres;
+        
     [ObservableProperty] public string _textoContador;
+    [ObservableProperty] public double _cantidadDonacion;
+    [ObservableProperty] public Bitmap _imagenDonacion;
     [ObservableProperty] public bool _siguiente;
     [ObservableProperty] public bool _anterior;
     
@@ -45,6 +51,9 @@ public partial class CatalogoViewModel : ObservableObject
     private int contadorLista = 0;
     
     private Bitmap? ImagenPorDefecto { get; } = new Bitmap(AssetLoader.Open(new Uri("avares://Catalogo_Avalonia_Final/Assets/avatar.png")));
+    private Bitmap? ImagenCaraUno { get; } = new Bitmap(AssetLoader.Open(new Uri("avares://Catalogo_Avalonia_Final/Assets/cara1.png")));
+    private Bitmap? ImagenCaraDos { get; } = new Bitmap(AssetLoader.Open(new Uri("avares://Catalogo_Avalonia_Final/Assets/cara2.png")));
+    private Bitmap? ImagenCaraTres { get; } = new Bitmap(AssetLoader.Open(new Uri("avares://Catalogo_Avalonia_Final/Assets/cara3.png")));
     
 
     public CatalogoViewModel()
@@ -56,6 +65,11 @@ public partial class CatalogoViewModel : ObservableObject
         PanelVer = false;
         PanelAniadir = false;
         PanelAyuda = false;
+        ActivarPanelDonacionUno = false;
+        ActivarPanelDonacionDos = false;
+        ActivarPanelDonacionTres = false;
+        ImagenDonacion = null;
+        CantidadDonacion = 0.0;
         TextoContador = "Producto 0 de 0:";
         IniciaListaProductos();
         ComprobarBotonesIndividual();
@@ -83,6 +97,7 @@ public partial class CatalogoViewModel : ObservableObject
 
     private void ProductosALista()
     {
+        ProductosLista.Clear();
         foreach (var produto in Productos)
         {
             StringBuilder productoTexto = new StringBuilder();
@@ -115,6 +130,96 @@ public partial class CatalogoViewModel : ObservableObject
         }
     }
 
+    private void ComprobarImagenDonacion()
+    {
+        if (CantidadDonacion == 0.0)
+        {
+            ImagenDonacion = null;
+            ActivarPanelDonacionUno = false;
+            ActivarPanelDonacionDos = false;
+            ActivarPanelDonacionTres = false;
+        }
+        if (CantidadDonacion > 0.0 && CantidadDonacion <= 49.0)
+        {
+            ImagenDonacion = ImagenCaraUno;
+            ActivarPanelDonacionUno = true;
+        }
+        if(CantidadDonacion >= 50.0 && CantidadDonacion <= 99.0)
+        {
+            ImagenDonacion = ImagenCaraDos;
+            ActivarPanelDonacionDos = true;
+        }
+
+        if (CantidadDonacion >= 100.0)
+        {
+            ImagenDonacion = ImagenCaraTres;
+            ActivarPanelDonacionTres = true;
+        }
+    }
+    
+    [RelayCommand]
+    private void DonarCinco()
+    {
+        CantidadDonacion += 5.0;
+        ComprobarImagenDonacion();
+    }
+    
+    [RelayCommand]
+    private void DonarDiez()
+    {
+        CantidadDonacion += 10.0;
+        ComprobarImagenDonacion();
+    }
+    
+    [RelayCommand]
+    private void DonarVeinte()
+    {
+        CantidadDonacion += 20.0;
+        ComprobarImagenDonacion();
+    }
+    
+    [RelayCommand]
+    private async Task BotonDonar()
+    {
+        CantidadDonacion = 0.0;
+        ComprobarImagenDonacion();
+        
+        // Mostrar mensaje cuando haga la donacion:
+        await DialogHost.Show(
+            new StackPanel
+            {
+                Orientation = Orientation.Vertical,
+                Width = 380,
+                Height = 100,
+                VerticalAlignment =  VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                Spacing = 10,
+                Children =
+                {
+                    new TextBlock { Text = "GRACIAS por tu Apoyo!", FontSize = 25,FontWeight = FontWeight.Bold, HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center },
+                    new Button
+                    {
+                        Content = "Te queremos!",
+                        Height = 60,
+                        Width = 200,
+                        FontSize = 25,
+                        Foreground = new SolidColorBrush(Colors.Azure),
+                        VerticalContentAlignment = VerticalAlignment.Center,
+                        HorizontalContentAlignment = HorizontalAlignment.Center,
+                        HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center,
+                        Command = new RelayCommand(() =>
+                        {
+                            // Cerrar el diálogo
+                            DialogHost.GetDialogSession("MainDialogHost")?.Close();
+                        })
+                    }
+                }
+            },
+            "MainDialogHost"
+        );
+        return;
+    }
+    
     [RelayCommand]
     private async Task EliminarProductos()
     {
@@ -134,6 +239,7 @@ public partial class CatalogoViewModel : ObservableObject
                 {
                     Orientation = Orientation.Vertical,
                     Spacing = 10,
+                    Background = new SolidColorBrush(Color.FromArgb(240,250,100,100)),
                     Children =
                     {
                         new TextBlock { Text = "No has seleccionado ningún producto para eliminar.", FontWeight = FontWeight.Bold },
@@ -164,6 +270,7 @@ public partial class CatalogoViewModel : ObservableObject
                     {
                         Orientation = Orientation.Horizontal,
                         Spacing = 10,
+                        Background = new SolidColorBrush(Color.FromArgb(240,250,100,100)),
                         Children =
                         {
                             new Button
@@ -229,6 +336,7 @@ public partial class CatalogoViewModel : ObservableObject
         PanelVer = true;
         PanelAyuda = false;
         contadorLista = 0;
+        TextoContador = "Producto " + (contadorLista + 1) + " de " + Productos.Count + ":";
         ProductosALista();
         ComprobarBotonesIndividual();
         IniciarCampos();
