@@ -284,10 +284,10 @@
                                                                                                 /> 
                 
                                                                                         <!-- Detalles del producto -->
-                                                                                        <TextBlock Foreground="Azure" Text="{Binding Nombre}" FontSize="20" FontWeight="Bold" VerticalAlignment="Center" Margin="5,0,0,0" />
-                                                                                        <TextBlock Foreground="Azure" Text="{Binding Marca}" VerticalAlignment="Center" Margin="5,0,0,0" />
-                                                                                        <TextBlock Foreground="Azure" Text="{Binding Categoria}" VerticalAlignment="Center" Margin="5,0,0,0" />
-                                                                                        <TextBlock Foreground="Azure" Text="{Binding Precio, StringFormat={}{0:C}}" VerticalAlignment="Center" Margin="5,0,0,0" />
+                                                                                        <TextBlock Foreground="Azure" Text="{Binding Nombre}" FontSize="25" FontWeight="Bold" VerticalAlignment="Center" Margin="5,0,0,0" />
+                                                                                        <TextBlock Foreground="Azure" Text="{Binding Marca}" FontSize="20" VerticalAlignment="Center" Margin="10,0,0,0" />
+                                                                                        <TextBlock Foreground="Azure" Text="{Binding Categoria}"  FontSize="20" VerticalAlignment="Center" Margin="10,0,0,0" />
+                                                                                        <TextBlock Foreground="Azure" Text="{Binding Precio,StringFormat={}{0:C}}" FontSize="20" VerticalAlignment="Center" Margin="10,0,0,0" />
                                                                                 </StackPanel>
                                                                         </DockPanel>
                                                                 </Border>
@@ -401,15 +401,15 @@
                                 <StackPanel Grid.Row="1" Orientation="Vertical" Spacing="10">
                                         <TextBlock Text="¿Necesitas ayuda? Aquí encontrarás respuestas a tus preguntas frecuentes." TextWrapping="Wrap" HorizontalAlignment="Center" 
                                                    Foreground="Black" FontSize="15" Margin="0,5,0,0"/>
-                                        <Expander Header="Cómo usar el catálogo" Foreground="Azure" IsExpanded="True" FontSize="15" Margin="100,0,0,0">
+                                        <Expander Header="Cómo usar el catálogo" Foreground="Azure" IsExpanded="True" FontSize="15" Margin="100,0,100,0">
                                                 <TextBlock Text="--> Para ver el listado haz clic en el submenú 'Ver Artículos..' y podras elegir entre las vistas disponibles, Individual o Listado." 
                                                            Foreground="Azure" FontSize="15" TextWrapping="Wrap" />
                                         </Expander>
-                                        <Expander Header="Cómo añadir un artículo" Foreground="Azure" FontSize="15" Margin="100,0,0,0">
+                                        <Expander Header="Cómo añadir un artículo" Foreground="Azure" FontSize="15" Margin="100,0,100,0">
                                                 <TextBlock Text="--> Para añadir un articulo selecciona en el submenú 'Añadir Artículo..' y completa los campos. Luego pulsa el botón para guardar el artículo." 
                                                            Foreground="Azure" FontSize="15" TextWrapping="Wrap" />
                                         </Expander>
-                                        <Expander Header="Contacto" Foreground="Azure" FontSize="15" Margin="100,0,0,0">
+                                        <Expander Header="Contacto" Foreground="Azure" FontSize="15" Margin="100,0,100,0">
                                                 <TextBlock Text="--> Envíanos un correo a xzerohakerx@gmail.com para más ayuda o información." FontSize="15" 
                                                            Foreground="Azure" TextWrapping="Wrap" />
                                         </Expander>
