@@ -215,10 +215,11 @@ public partial class CatalogoViewModel : ObservableObject
         foreach (var produto in Productos)
         {
             StringBuilder productoTexto = new StringBuilder();
-            productoTexto.Append("NOMBRE: " + produto.Nombre.PadRight(30).PadLeft(5));
-            productoTexto.Append("-- MARCA: " + produto.Marca.PadRight(20).PadLeft(5));
-            productoTexto.Append("-- CATEGORIA: " + produto.Categoria.PadRight(20).PadLeft(5));
-            productoTexto.Append("-- STOCK: " + produto.Stock.ToString().PadRight(20).PadLeft(5));
+            productoTexto.Append("NOMBRE: " + produto.Nombre.PadRight(5).PadLeft(5));
+            productoTexto.Append("  -- MARCA: " + produto.Marca.PadRight(5).PadLeft(5));
+            productoTexto.Append("  -- CATEGORIA: " + produto.Categoria.PadRight(5).PadLeft(5));
+            productoTexto.Append("  -- PRECIO: " + produto.Precio.ToString().PadRight(5).PadLeft(5) + "€/u.");
+            productoTexto.Append("  -- STOCK: " + produto.Stock.ToString().PadLeft(5)+ "u.");
             ProductosLista.Add(productoTexto.ToString());
         } 
     }
