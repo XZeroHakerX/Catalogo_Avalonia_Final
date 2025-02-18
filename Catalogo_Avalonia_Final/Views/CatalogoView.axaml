@@ -23,7 +23,7 @@
                                 <MenuItem Header="_Catálogo" Foreground="DarkSlateGray" FontWeight="SemiBold">
                                         <MenuItem Header="_Nuevo.." />
                                         <MenuItem Header="_Abrir.." />
-                                        <MenuItem Header="_Guardar.." />
+                                        <MenuItem Header="_Guardar.." Command="{Binding GuardarProductosCommand}"/>
                                         <Separator />
                                         <MenuItem Header="_Salir.." Command="{Binding ExitApplicationCommand}"/>
                                 </MenuItem>
@@ -127,7 +127,7 @@
                                                         <StackPanel Background="CadetBlue" Orientation="Vertical" Spacing="20" Width="200" Height="360">
                                                                 <StackPanel Background="LightGray" Orientation="Vertical" Width="200" Height="355" Margin="5">
                                                                         <StackPanel Orientation="Vertical" Spacing="7"  Background="Azure"  Margin="5" >
-                                                                                <Image Name="Imagen" MaxHeight="350" MaxWidth="350" Source="{Binding Foto}"/>
+                                                                                <Image Name="Imagen" Height="180" Width="180" Source="{Binding Foto}"/>
                                                                                 <StackPanel Background="DarkSlateGray">
                                                                                         <Button Content="CARGAR IMAGEN" 
                                                                                                 Width="220" 
@@ -135,7 +135,9 @@
                                                                                                 HorizontalContentAlignment="Center"
                                                                                                 Background="CadetBlue"
                                                                                                 Foreground="Azure"
-                                                                                                FontSize="20"/>
+                                                                                                FontSize="20"
+                                                                                                Command="{Binding SubirFotoCommand}"
+                                                                                                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}"/>
                                                                                 </StackPanel>
                                                                         </StackPanel>
                                                                         <StackPanel Orientation="Vertical" Spacing="7"  Background="Azure" Width="160" Height="100" Margin="5" >
@@ -151,8 +153,29 @@
 						
                 
                 <!-- Panel Ver: -->
-                        <TabControl Name="PanelVer" IsVisible= "{Binding PanelVer}" Margin="5">
-                                
+                        
+                        <TabControl x:Name="ControlTab" SelectedIndex="{Binding SelectedIndex}" Name="PanelVer" IsVisible= "{Binding PanelVer}" Margin="5">
+                        
+                        <!-- Pestaña Lista: -->
+                                <TabItem Header="Listado.." Background="DarkSlateGray" Foreground="White" Margin="15,0,0,0"  >
+                                        
+                                        <StackPanel Background="CadetBlue" Width="760" Height="340" Spacing="">
+                                                <ListBox Background="Azure" Width="750" Height="330" Margin="5" VerticalAlignment="Bottom" 
+                                                         ItemsSource="{Binding ProductosLista}"
+                                                         ScrollViewer.VerticalScrollBarVisibility="Visible"
+                                                         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                                        <ListBox.ItemTemplate>
+                                                                <DataTemplate>
+                                                                        <Border BorderBrush="CadetBlue" BorderThickness="2" 
+                                                                                CornerRadius="8" Padding="4" Width="720" Height="50">
+                                                                                <TextBlock Foreground="Black" VerticalAlignment="Center" Text="{Binding}" />
+                                                                        </Border>
+                                                                </DataTemplate>
+                                                        </ListBox.ItemTemplate>
+                                                </ListBox>
+                                        </StackPanel>
+                                        
+                                </TabItem>
                         <!-- Pestaña Individual: -->
                                 <TabItem Header="Individual.." Background="DarkSlateGray" Foreground="White" Margin="15,0,0,0">
                                         <StackPanel Orientation="Horizontal" Spacing="10" Background="CadetBlue" Width="760" Height="340">
@@ -219,10 +242,10 @@
                                         <!-- Parte Derecha Informacion: -->
                                                 <StackPanel Orientation="Vertical"  Width="260" Height="330" Spacing="10" Background="Azure">
                                                 <!-- Foto -->
-                                                        <Image Source="{Binding Foto}" Width="200" Height="200" Margin="5" />
+                                                        <Image Source="{Binding Foto}" Width="230" Height="230" Margin="5" />
                                                 <!-- Precio -->
                                                         <TextBlock Foreground="Black" FontWeight="Bold" FontSize="40" TextAlignment="Center" 
-                                                                   Text="{Binding Precio, StringFormat={}{0:C}}" Margin="20,40,0,0" 
+                                                                   Text="{Binding Precio, StringFormat={}{0:C}}" Margin="16,16,0,0" 
                                                                    />
                                                 </StackPanel>
                                                 
@@ -230,26 +253,6 @@
                                         
                                 </TabItem>
                         
-                        <!-- Pestaña Lista: -->
-                                <TabItem Header="Listado.." Background="DarkSlateGray" Foreground="White" Margin="15,0,0,0"  >
-                                        
-                                        <StackPanel Background="CadetBlue" Width="760" Height="340" Spacing="">
-                                                <ListBox Background="Azure" Width="750" Height="330" Margin="5" VerticalAlignment="Bottom" 
-                                                         ItemsSource="{Binding ProductosLista}"
-                                                         ScrollViewer.VerticalScrollBarVisibility="Visible"
-                                                         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                                                        <ListBox.ItemTemplate>
-                                                                <DataTemplate>
-                                                                        <Border BorderBrush="CadetBlue" BorderThickness="2" 
-                                                                                CornerRadius="8" Padding="4" Width="720" Height="50">
-                                                                                <TextBlock Foreground="Black" VerticalAlignment="Center" Text="{Binding}" />
-                                                                        </Border>
-                                                                </DataTemplate>
-                                                        </ListBox.ItemTemplate>
-                                                </ListBox>
-                                        </StackPanel>
-                                        
-                                </TabItem>
                         </TabControl>
                         
 						
@@ -425,17 +428,17 @@
                         <!-- Contenido principal de la ventana -->
                         <Grid>
                         </Grid>
-
-                        <!-- Contenido del diálogo (opcional) -->
-                        <dialogHost:DialogHost.DialogContent>
-                                <StackPanel Orientation="Vertical" Spacing="10" >
-                                        <TextBlock Text="¿Estás seguro de que quieres eliminar estos productos?" FontWeight="Bold" />
-                                        <Button Content="Aceptar" CommandParameter="Yes" HorizontalContentAlignment="Center" HorizontalAlignment="Center"/>
-                                        <Button Content="Cancelar" CommandParameter="No" HorizontalContentAlignment="Center" HorizontalAlignment="Center" />
-                                </StackPanel>
-                        </dialogHost:DialogHost.DialogContent>
+                        
                 </dialogHost:DialogHost>
                 
+        <!-- Ventana de dialogo para confirmacion de cambio de lista catalogo-->        
+                <dialogHost:DialogHost Identifier="DosDialogHost" Canvas.Left="80" Canvas.Top="40" Background="DarkSlateGray">
+                                
+                        <!-- Contenido principal de la ventana -->
+                        <Grid>
+                        </Grid>
+                        
+                </dialogHost:DialogHost>        
                 
         </Canvas>
 </Window>
