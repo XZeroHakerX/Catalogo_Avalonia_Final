@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Zero\\Desktop\\Proyectos\\Catalogo_Avalonia_Final\\Catalogo_Avalonia_Final\\Catalogo_Avalonia_Final.csproj": {}
+    "C:\\Users\\zeroh\\Desktop\\Proyectos\\Catalogo_Avalonia_Final\\Catalogo_Avalonia_Final\\Catalogo_Avalonia_Final.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Zero\\Desktop\\Proyectos\\Catalogo_Avalonia_Final\\Catalogo_Avalonia_Final\\Catalogo_Avalonia_Final.csproj": {
+    "C:\\Users\\zeroh\\Desktop\\Proyectos\\Catalogo_Avalonia_Final\\Catalogo_Avalonia_Final\\Catalogo_Avalonia_Final.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Zero\\Desktop\\Proyectos\\Catalogo_Avalonia_Final\\Catalogo_Avalonia_Final\\Catalogo_Avalonia_Final.csproj",
+        "projectUniqueName": "C:\\Users\\zeroh\\Desktop\\Proyectos\\Catalogo_Avalonia_Final\\Catalogo_Avalonia_Final\\Catalogo_Avalonia_Final.csproj",
         "projectName": "Catalogo_Avalonia_Final",
-        "projectPath": "C:\\Users\\Zero\\Desktop\\Proyectos\\Catalogo_Avalonia_Final\\Catalogo_Avalonia_Final\\Catalogo_Avalonia_Final.csproj",
-        "packagesPath": "C:\\Users\\Zero\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Zero\\Desktop\\Proyectos\\Catalogo_Avalonia_Final\\Catalogo_Avalonia_Final\\obj\\",
+        "projectPath": "C:\\Users\\zeroh\\Desktop\\Proyectos\\Catalogo_Avalonia_Final\\Catalogo_Avalonia_Final\\Catalogo_Avalonia_Final.csproj",
+        "packagesPath": "C:\\Users\\zeroh\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\zeroh\\Desktop\\Proyectos\\Catalogo_Avalonia_Final\\Catalogo_Avalonia_Final\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Zero\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\zeroh\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -42,9 +38,8 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "all"
-        },
-        "SdkAnalysisLevel": "9.0.100"
+          "auditMode": "direct"
+        }
       },
       "frameworks": {
         "net8.0": {
@@ -103,7 +98,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

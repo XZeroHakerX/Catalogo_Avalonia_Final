@@ -21,8 +21,6 @@
                                 
                                 <!-- Opciones para manejar varias base de datos de articulos:-->
                                 <MenuItem Header="_Catálogo" Foreground="DarkSlateGray" FontWeight="SemiBold">
-                                        <MenuItem Header="_Nuevo.." />
-                                        <MenuItem Header="_Abrir.." />
                                         <MenuItem Header="_Guardar.." Command="{Binding GuardarProductosCommand}"/>
                                         <Separator />
                                         <MenuItem Header="_Salir.." Command="{Binding ExitApplicationCommand}"/>
