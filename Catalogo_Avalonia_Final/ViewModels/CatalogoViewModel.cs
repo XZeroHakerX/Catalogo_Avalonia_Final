@@ -1,22 +1,21 @@
 using System;
 using System.ComponentModel;
-using Avalonia.Media.Imaging;
-using Avalonia.Collections;
-using Avalonia.Platform;
-using Catalogo_Avalonia_Final.Model;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using System.Linq;
 using System.Reactive;
 using System.Text;
 using System.Threading.Tasks;
 using Avalonia;
-using ReactiveUI;
+using Avalonia.Collections;
 using Avalonia.Controls;
-using Avalonia.Input;
 using Avalonia.Layout;
 using Avalonia.Media;
+using Avalonia.Media.Imaging;
+using Avalonia.Platform;
+using Catalogo_Avalonia_Final.Model;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using DialogHostAvalonia;
+using ReactiveUI;
 
 namespace Catalogo_Avalonia_Final.ViewModels;
 
@@ -28,7 +27,11 @@ public partial class CatalogoViewModel : ObservableObject
     [ObservableProperty] public string? _marca;
     [ObservableProperty] public string? _descripcion;
     [ObservableProperty] public double? _precio;
+    [ObservableProperty] public string? _precioTexto;
+    [ObservableProperty] public string? _errorPrecio;
     [ObservableProperty] public int? _stock;
+    [ObservableProperty] public string? _stockTexto;
+    [ObservableProperty] public string? _errorStock;
     [ObservableProperty] public string? _categoria;
     [ObservableProperty] public string? _otraInformacion;
     [ObservableProperty] public Bitmap? _foto;
@@ -59,6 +62,7 @@ public partial class CatalogoViewModel : ObservableObject
     [ObservableProperty] public string _textoContador;
     [ObservableProperty] public AvaloniaList<Producto>? _productos;
     [ObservableProperty] public AvaloniaList<String>? _productosLista;
+    [ObservableProperty] public AvaloniaList<String>? _categorias; 
     
     // Comando para cerrar la aplicación
     public ReactiveCommand<Unit, Unit> ExitApplicationCommand { get; }
@@ -86,9 +90,10 @@ public partial class CatalogoViewModel : ObservableObject
         ActivarPanelDonacionUno = false;
         ActivarPanelDonacionDos = false;
         ActivarPanelDonacionTres = false;
+        Categorias = new AvaloniaList<String>{"Sonido","Video","Raton","Teclado"};
         ImagenDonacion = null;
         ImagenEmpresa = new Bitmap(AssetLoader.Open(new Uri("avares://Catalogo_Avalonia_Final/Assets/empresa.png")));
-        ImagenEmpresaFondo = new Bitmap(AssetLoader.Open(new Uri("avares://Catalogo_Avalonia_Final/Assets/empresa25.png")));
+        ImagenEmpresaFondo = new Bitmap(AssetLoader.Open(new Uri("avares://Catalogo_Avalonia_Final/Assets/empresafinal.png")));
         CantidadDonacion = 0.0;
         TextoContador = "Producto 0 de 0:";
         IniciaListaProductos();
@@ -143,6 +148,56 @@ public partial class CatalogoViewModel : ObservableObject
         }
         
     }
+    
+    // Convertidores y errores de precio y stock para añadir
+    public double? PrecioComoNumero
+    {
+        get
+        {
+            if (double.TryParse(PrecioTexto, out double resultado))
+            {
+                return resultado;
+            }
+            return null;
+        }
+    }
+
+    partial void OnPrecioTextoChanged(string? newValue)
+    {
+        if (string.IsNullOrEmpty(newValue) || double.TryParse(newValue, out _))
+        {
+            ErrorPrecio = null; 
+        }
+        else
+        {
+            ErrorPrecio = "El precio debe ser un número entero o decimal válido.";
+        }
+    }
+    
+    public int? StockComoNumero
+    {
+        get
+        {
+            if (int.TryParse(StockTexto, out int resultado))
+            {
+                return resultado;
+            }
+            return null;
+        }
+    }
+
+    partial void OnStockTextoChanged(string? newValue)
+    {
+        if (string.IsNullOrEmpty(newValue) || int.TryParse(newValue, out _))
+        {
+            ErrorPrecio = null;
+        }
+        else
+        {
+            ErrorPrecio = "El stock debe ser un número entero válido.";
+        }
+    }
+    
     
     // Metodo para pasar la lista de productos a una lista de string:
     private void ProductosALista()
@@ -209,17 +264,20 @@ public partial class CatalogoViewModel : ObservableObject
     }
     
     // Metodos para limpiar los componentes:
+    
+    [RelayCommand]
     private void LimpiarCampos()
     {
         Nombre = string.Empty;
         Marca = string.Empty;
         Descripcion = string.Empty;
+        PrecioTexto = "0.0";
         Precio = 0.0;
+        StockTexto = "0";
         Stock = 0;
         Categoria = string.Empty;
         OtraInformacion = string.Empty;
         Foto = ImagenPorDefecto;
-        TextoContador = "Producto 0 de 0:";
     }
     
     private void LimpiarPanelesDonacion()
@@ -296,6 +354,87 @@ public partial class CatalogoViewModel : ObservableObject
     
     
     // Metodo para gestion de los productos:
+    [RelayCommand]
+    private async Task AgregarProducto()
+    {
+        if (!string.IsNullOrEmpty(Nombre) && !string.IsNullOrEmpty(Marca) && !string.IsNullOrEmpty(Categoria))
+        {
+             
+            var nuevoProducto =
+                new Producto(Nombre, Marca, Descripcion??"", PrecioComoNumero??0.0, StockComoNumero??0, Categoria  , OtraInformacion??"", 
+                    Foto!);
+            
+            Productos.Add(nuevoProducto); // Añade el producto a la lista observable
+            LimpiarCampos(); // Limpia los campos después de añadir
+            
+            // Mostrar mensaje si se agrego correctamente el usuario
+            await DialogHost.Show(
+                new StackPanel
+                {
+                    Orientation = Orientation.Vertical,
+                    Width = 400,
+                    Height = 70,
+                    Spacing = 10,
+                    Background = new SolidColorBrush(Color.FromArgb(255,50,70,50)),
+                    Children =
+                    {
+                        new TextBlock { Text = "Producto agregado correctamente!",Foreground = new SolidColorBrush(Colors.Azure), 
+                            FontWeight = FontWeight.Bold, HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center, 
+                            VerticalAlignment = Avalonia.Layout.VerticalAlignment.Center, Margin = new Thickness(5)},
+                        new Button
+                        {
+                            Content = "PERFECTO",
+                            Foreground = new SolidColorBrush(Colors.Azure),
+                            Background = new SolidColorBrush(Colors.CadetBlue),
+                            HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center,
+                            Command = new RelayCommand(() =>
+                            {
+                                // Cerrar el diálogo
+                                DialogHost.GetDialogSession("MainDialogHost")?.Close();
+                            })
+                        }
+                    }
+                },
+                "MainDialogHost"
+            );
+            return;
+        }
+        else
+        {
+            // Mostrar mensaje si faltan datos minimos necesarios
+            await DialogHost.Show(
+                new StackPanel
+                {
+                    Orientation = Orientation.Vertical,
+                    Width = 400,
+                    Height = 70,
+                    Spacing = 10,
+                    Background = new SolidColorBrush(Color.FromArgb(255,50,50,50)),
+                    Children =
+                    {
+                        new TextBlock { Text = "Nombre, Marca y Categoria son OBLIGATORIOS.",Foreground = new SolidColorBrush(Colors.Azure), 
+                            FontWeight = FontWeight.Bold, HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center, 
+                            VerticalAlignment = Avalonia.Layout.VerticalAlignment.Center, Margin = new Thickness(5)},
+                        new Button
+                        {
+                            Content = "OK",
+                            Foreground = new SolidColorBrush(Colors.Azure),
+                            Background = new SolidColorBrush(Colors.CadetBlue),
+                            HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center,
+                            Command = new RelayCommand(() =>
+                            {
+                                // Cerrar el diálogo
+                                DialogHost.GetDialogSession("MainDialogHost")?.Close();
+                            })
+                        }
+                    }
+                },
+                "MainDialogHost"
+            );
+            return;
+        }
+    }
+    
     [RelayCommand]
     private async Task EliminarProductos()
     {
@@ -432,6 +571,7 @@ public partial class CatalogoViewModel : ObservableObject
         contadorLista = 0;
         TextoContador = "Producto " + (contadorLista + 1) + " de " + Productos.Count + ":";
         LimpiarPanelesDonacion();
+        LimpiarCampos();
         ProductosALista();
         ComprobarBotonesIndividual();
         IniciarCampos();
@@ -477,9 +617,8 @@ public partial class CatalogoViewModel : ObservableObject
         PanelInfo = true;
         PanelVer = false;
         PanelAyuda = false;
-        LimpiarCampos();
         LimpiarPanelesDonacion();
-        Foto = ImagenPorDefecto;
+        
     }
     
     [RelayCommand]
@@ -494,9 +633,8 @@ public partial class CatalogoViewModel : ObservableObject
         PanelInfo = false;
         PanelVer = false;
         PanelAyuda = false;
-        LimpiarCampos();
         LimpiarPanelesDonacion();
-        Foto = ImagenPorDefecto;
+        
     }
     
     [RelayCommand]
@@ -509,9 +647,8 @@ public partial class CatalogoViewModel : ObservableObject
         PanelInfo = false;
         PanelVer = false;
         PanelAyuda = true;
-        LimpiarCampos();
         LimpiarPanelesDonacion();
-        Foto = ImagenPorDefecto;
+        
     }
 
     

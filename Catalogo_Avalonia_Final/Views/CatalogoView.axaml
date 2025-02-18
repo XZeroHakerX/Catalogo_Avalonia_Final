@@ -70,17 +70,18 @@
                                                 HorizontalContentAlignment="Center"
                                                 VerticalContentAlignment="Center"
                                                 Background="Chartreuse"
-                                                Command=""
+                                                Command="{Binding AgregarProductoCommand}"
                                                 FontSize="30"
                                                 FontWeight="Bold"/>
-                                        <StackPanel  Orientation="Vertical" VerticalAlignment="Top" Margin="0,120">
+                                        <TextBlock Text="{Binding ErrorPrecio}" Margin="10,5,0,0" TextWrapping="Wrap" Height="50" VerticalAlignment="Center" Foreground="Red" />
+                                        <StackPanel  Orientation="Vertical" VerticalAlignment="Top" Margin="0,40,0,0">
                                                 <TextBlock Text="Si pulsas cancelar, se reiniciaran los campos:" HorizontalAlignment="Center" FontSize="10" Width="155" TextWrapping="Wrap"/>
                                                 <Button Content="Cancelar" 
                                                         Width="150" 
                                                         HorizontalAlignment="Center" 
                                                         HorizontalContentAlignment="Center" 
                                                         Background="Brown" 
-                                                        Command=""
+                                                        Command="{Binding LimpiarCamposCommand}"
                                                         FontSize="20"
                                                         Margin="0,0"/>
                                         </StackPanel>
@@ -94,32 +95,30 @@
                                                                 <StackPanel Background="LightGray" Orientation="Vertical" Margin="5" Spacing="20" Width="350" Height="355">
                                                                         <StackPanel Orientation="Horizontal" Spacing="50"  Background="Azure"  Margin="5"  >
                                                                                 <TextBlock Foreground="Black" Text="Nombre:" MinWidth="80" VerticalAlignment="Center" FontSize="20" />
-                                                                                <TextBox Name="TextoNombre" FontSize="15" Width="200" Height="15" />
+                                                                                <TextBox Text="{Binding Nombre, Mode=TwoWay}" Name="TextoNombre" FontSize="15" Width="200" Height="15" />
                                                                         </StackPanel>
                                                                         <StackPanel Orientation="Horizontal" Spacing="52" Background="Azure"  Margin="5" >
                                                                                 <TextBlock Foreground="Black" Text="Marca:" MinWidth="80" VerticalAlignment="Center" FontSize="20"/>
-                                                                                <TextBox Name="TextoMarca" FontSize="15" Width="200" Height="15"/>
+                                                                                <TextBox Text="{Binding Marca, Mode=TwoWay}" Name="TextoMarca" FontSize="15" Width="200" Height="15"/>
                                                                         </StackPanel>
                                                                         <StackPanel Orientation="Horizontal"  Spacing="34" Background="Azure"   Margin="5" >
                                                                                 <TextBlock Foreground="Black" Text="Categoría:" MinWidth="80" VerticalAlignment="Center" FontSize="20"/>
-                                                                                <ComboBox  PlaceholderText="Selecciona Categoría" Width="200">
-                                                                                        <ComboBoxItem >Sonido</ComboBoxItem>
-                                                                                        <ComboBoxItem >Video</ComboBoxItem>
-                                                                                        <ComboBoxItem >Raton</ComboBoxItem>
-                                                                                        <ComboBoxItem >Teclado</ComboBoxItem>
-                                                                                </ComboBox>
+                                                                                <ComboBox ItemsSource="{Binding Categorias}" 
+                                                                                        SelectedItem="{Binding Categoria, Mode=TwoWay}" 
+                                                                                        PlaceholderText="Selecciona Categoría" 
+                                                                                        Width="200" />
                                                                         </StackPanel>
                                                                         <StackPanel Orientation="Horizontal" Spacing="52" Background="Azure"  Margin="5" >
                                                                                 <TextBlock Foreground="Black" Text="Stock:" MinWidth="80" VerticalAlignment="Center" FontSize="20"/>
-                                                                                <TextBox Name="TextoStock" FontSize="15" Width="200" Height="15"/>
+                                                                                <TextBox Text="{Binding StockTexto, Mode=TwoWay}" Name="TextoStock" FontSize="15" Width="200" Height="15"/>
                                                                         </StackPanel>
                                                                         <StackPanel Orientation="Horizontal" Spacing="13" Background="Azure"  Margin="5" >
                                                                                 <TextBlock Foreground="Black" Text="Descripción:" MinWidth="80" VerticalAlignment="Center" FontSize="20"/>
-                                                                                <TextBox Name="TextoDescripcion" FontSize="15" Width="200" Height="30"/>
+                                                                                <TextBox Text="{Binding Descripcion, Mode=TwoWay}" Name="TextoDescripcion" FontSize="15" Width="200" Height="30"/>
                                                                         </StackPanel>
                                                                         <StackPanel Orientation="Horizontal" Spacing="13"  Background="Azure"  Margin="5" >
                                                                                 <TextBlock Foreground="Black" Text="Otros datos:" MinWidth="80" VerticalAlignment="Center" FontSize="20"/>
-                                                                                <TextBox  Name="TextoOtrosDatos" FontSize="15" Width="200" Height="30"/>
+                                                                                <TextBox Text="{Binding OtraInformacion, Mode=TwoWay}" Name="TextoOtrosDatos" FontSize="15" Width="200" Height="30"/>
                                                                         </StackPanel>
                                                                 </StackPanel>
                                                         </StackPanel>
@@ -141,7 +140,7 @@
                                                                         </StackPanel>
                                                                         <StackPanel Orientation="Vertical" Spacing="7"  Background="Azure" Width="160" Height="100" Margin="5" >
                                                                                 <TextBlock Foreground="Black" Text="Precio:" MinWidth="80" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
-                                                                                <TextBox Name="TextoPrecio" FontSize="40" Width="150" Height="60"/>
+                                                                                <TextBox Text="{Binding PrecioTexto, Mode=TwoWay}" Name="TextoPrecio" FontSize="40" Width="150" Height="60"/>
                                                                         </StackPanel>
                                                                 </StackPanel>
                                                         </StackPanel>
@@ -198,7 +197,7 @@
                                                                 
                                                         <!-- Descripción -->
                                                                 <TextBlock Foreground="Black" Grid.Row="4" Grid.Column="0" Text="Descripción:" FontWeight="Bold" FontSize="20" Margin="5,0,0,0" />
-                                                                <TextBlock Foreground="Black" Grid.Row="4" Grid.Column="1" Width="300" Height="60" TextWrapping="Wrap"  MaxLines="3" Text="{Binding Categoria}" FontSize="15" Margin="77,4,0,0" />
+                                                                <TextBlock Foreground="Black" Grid.Row="4" Grid.Column="1" Width="300" Height="60" TextWrapping="Wrap"  MaxLines="3" Text="{Binding Descripcion}" FontSize="15" Margin="77,4,0,0" />
                                                                 
                                                         <!-- Otra Información -->
                                                                 <TextBlock Foreground="Black" Grid.Row="5" Grid.Column="0" Text="Otra Información:" FontWeight="Bold" FontSize="20" Margin="5,0,0,0" />
