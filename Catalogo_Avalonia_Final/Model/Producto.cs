@@ -6,6 +6,8 @@ namespace Catalogo_Avalonia_Final.Model;
 
 public class Producto
 {
+    
+    // Atributos de la clase productos necesarios:
     public string Nombre {get; set;}
     public string Marca {get; set;}
     public string Descripcion {get; set;}
@@ -14,8 +16,10 @@ public class Producto
     public string Categoria {get; set;}
     public string OtraInformacion {get; set;}
     
+    // Tenemos la foto en array de byte para la serializacion:
     private byte[] fotoBytes;
 
+    // Aqui la variable con la que se accede o se cambia la foto
     public Bitmap Foto
     {
         get => fotoBytes != null ? new Bitmap(new MemoryStream(fotoBytes)) : null;
@@ -36,7 +40,7 @@ public class Producto
         }
     }
     
-    
+    // Boolean para el panel de eliminacion:
     public bool IsSelected {get; set;}
   
     
@@ -69,7 +73,7 @@ public class Producto
         writer.Write(OtraInformacion);
         writer.Write(IsSelected);
 
-        // Serializar la foto (si existe)
+        // Serializar la foto 
         if (fotoBytes != null)
         {
             writer.Write(fotoBytes.Length); // Escribir la longitud del array de bytes
@@ -93,7 +97,7 @@ public class Producto
         string otraInformacion = reader.ReadString();
         bool isSelected = reader.ReadBoolean();
 
-        // Leer la foto (si existe)
+        // Leer la foto 
         int fotoLength = reader.ReadInt32();
         Bitmap foto = null;
         if (fotoLength > 0)

@@ -66,6 +66,8 @@ public partial class CatalogoViewModel : ObservableObject
     [ObservableProperty] public AvaloniaList<String>? _productosLista;
     [ObservableProperty] public AvaloniaList<String>? _categorias; 
     
+    
+    // Metodos para el control de la vista pestaña del panel ver:
     private int _selectedIndex;
     public int SelectedIndex
     {
@@ -89,7 +91,6 @@ public partial class CatalogoViewModel : ObservableObject
     private Bitmap? ImagenCaraUno { get; } = new Bitmap(AssetLoader.Open(new Uri("avares://Catalogo_Avalonia_Final/Assets/cara1.png")));
     private Bitmap? ImagenCaraDos { get; } = new Bitmap(AssetLoader.Open(new Uri("avares://Catalogo_Avalonia_Final/Assets/cara2.png")));
     private Bitmap? ImagenCaraTres { get; } = new Bitmap(AssetLoader.Open(new Uri("avares://Catalogo_Avalonia_Final/Assets/cara3.png")));
-   
     
 
     // Constructor:
@@ -163,6 +164,7 @@ public partial class CatalogoViewModel : ObservableObject
     {
         get
         {
+            // Parsea a double
             if (double.TryParse(PrecioTexto, out double resultado))
             {
                 return resultado;
@@ -173,6 +175,7 @@ public partial class CatalogoViewModel : ObservableObject
 
     partial void OnPrecioTextoChanged(string? newValue)
     {
+        // Control para poder borrar el 0 inicial del texto:
         if (string.IsNullOrEmpty(newValue) || double.TryParse(newValue, out _))
         {
             ErrorPrecio = null; 
@@ -187,6 +190,7 @@ public partial class CatalogoViewModel : ObservableObject
     {
         get
         {
+            // Parsea a int
             if (int.TryParse(StockTexto, out int resultado))
             {
                 return resultado;
@@ -197,6 +201,7 @@ public partial class CatalogoViewModel : ObservableObject
 
     partial void OnStockTextoChanged(string? newValue)
     {
+        // Control para poder borrar el 0 inicial del texto:
         if (string.IsNullOrEmpty(newValue) || int.TryParse(newValue, out _))
         {
             ErrorPrecio = null;
@@ -248,6 +253,8 @@ public partial class CatalogoViewModel : ObservableObject
 
     private void ComprobarImagenDonacion()
     {
+        
+        // Cambia la foto del emoji y los stack panel de colores:
         if (CantidadDonacion == 0.0)
         {
             ImagenDonacion = null;
@@ -367,6 +374,7 @@ public partial class CatalogoViewModel : ObservableObject
     [RelayCommand]
     private async Task GuardarProductos()
     {
+        // Dialogo para confirmar la accion:
         var result = await DialogHost.Show(
             new StackPanel
             {
@@ -433,6 +441,8 @@ public partial class CatalogoViewModel : ObservableObject
             }
         }
         
+        
+        // Dialogo para terminar la accion:
         await DialogHost.Show(
             new StackPanel
             {
@@ -464,28 +474,50 @@ public partial class CatalogoViewModel : ObservableObject
         );
     }
 
+    
+    // Metodo para futuras actualizaciones:
     [RelayCommand]
     private void NuevosProductos()
     {
-        
+            
     }
 
+    // Metodo para cargar los datos del fichero:
     [RelayCommand]
     private void CargarProductos()
     {
         Productos.Clear();
         ProductosLista.Clear();
-        using (var stream = new FileStream(NombreListaActual, FileMode.OpenOrCreate, FileAccess.Read))
+
+        // Comprueba si el archivo existe o esta vacio para inicializarlo con el numero de objetos:
+        if (!File.Exists(NombreListaActual) || new FileInfo(NombreListaActual).Length == 0)
+        {
+            using (var stream = new FileStream(NombreListaActual, FileMode.Create, FileAccess.Write))
+            using (var writer = new BinaryWriter(stream))
+            {
+                writer.Write(0);
+            }
+        }
+
+        using (var stream = new FileStream(NombreListaActual, FileMode.Open, FileAccess.Read))
         using (var reader = new BinaryReader(stream))
         {
+
             int cantidad = reader.ReadInt32(); // Leer la cantidad de productos
+
+
             for (int i = 0; i < cantidad; i++)
             {
                 Productos.Add(Producto.Deserializar(reader)); // Deserializar cada producto
             }
+
+
         }
         ProductosALista();
     }
+    
+        
+    
 
     
     // Metodos para gestion de los productos:
@@ -499,8 +531,8 @@ public partial class CatalogoViewModel : ObservableObject
                 new Producto(Nombre, Marca, Descripcion??"", PrecioComoNumero??0.0, StockComoNumero??0, Categoria  , OtraInformacion??"", 
                     Foto!);
             
-            Productos.Add(nuevoProducto); // Añade el producto a la lista observable
-            LimpiarCampos(); // Limpia los campos después de añadir
+            Productos.Add(nuevoProducto); 
+            LimpiarCampos(); /
             
             // Actualizar la lista de productos en formato texto
             ProductosLista.Clear();
@@ -573,21 +605,28 @@ public partial class CatalogoViewModel : ObservableObject
             return;
         }
     }
-    
+
     [RelayCommand]
     private async void SubirFoto(Window ventanaPadre)
     {
-        var dlg = new OpenFileDialog();
-        dlg.Filters.Add(new FileDialogFilter() { Name = "Imágenes JPEG", Extensions = { "jpg" } });
-        dlg.Filters.Add(new FileDialogFilter() { Name = "Imágenes PNG", Extensions = { "png" } });
-        dlg.Filters.Add(new FileDialogFilter() { Name = "Todos los archivos", Extensions = { "*" } });
-        dlg.AllowMultiple = false;
-
-        var result = await dlg.ShowAsync(ventanaPadre);
-        if (result != null)
+        try
         {
-            string rutaFoto = result[0];
-            Foto = new Bitmap(rutaFoto);
+            var dlg = new OpenFileDialog();
+            dlg.Filters.Add(new FileDialogFilter() { Name = "Imágenes JPEG", Extensions = { "jpg" } });
+            dlg.Filters.Add(new FileDialogFilter() { Name = "Imágenes PNG", Extensions = { "png" } });
+            dlg.Filters.Add(new FileDialogFilter() { Name = "Todos los archivos", Extensions = { "*" } });
+            dlg.AllowMultiple = false;
+
+            var result = await dlg.ShowAsync(ventanaPadre);
+            if (result != null)
+            {
+                string rutaFoto = result[0];
+                Foto = new Bitmap(rutaFoto);
+            }
+        }
+        catch (Exception ex)
+        {
+            return;
         }
     }
     
